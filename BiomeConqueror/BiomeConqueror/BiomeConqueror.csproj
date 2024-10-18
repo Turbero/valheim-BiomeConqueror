@@ -63,6 +63,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\..\..\Libs\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\..\Libs\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiomeConqueror.cs" />
+    <Compile Include="MistlandsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

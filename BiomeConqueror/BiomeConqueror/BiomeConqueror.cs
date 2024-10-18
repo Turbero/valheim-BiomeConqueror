@@ -1,10 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System;
-using TMPro;
 using UnityEngine;
-using static Skills;
-using static Utils;
 
 namespace BiomeConqueror
 {
@@ -73,8 +69,7 @@ namespace BiomeConqueror
                     {
                         __instance.GetCurrentEnvironment().m_isWet = true;
                     }
-                }
-                else if (player.GetCurrentBiome() == Heightmap.Biome.Mountain)
+                } else if (player.GetCurrentBiome() == Heightmap.Biome.Mountain)
                 {
                     if (Player.m_localPlayer.HaveUniqueKey("ModerDefeated"))
                     {
