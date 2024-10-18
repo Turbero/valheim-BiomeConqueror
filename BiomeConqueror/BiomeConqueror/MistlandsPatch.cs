@@ -15,14 +15,16 @@ namespace BiomeConqueror
 
         static void Postfix(ref Demister __instance)
         {
+            if (!ConfigurationFile.modEnabled.Value) return;
+
             try
             {
-                if (Player.m_localPlayer.HaveUniqueKey("QueenDefeated"))
+                if (Player.m_localPlayer.HaveUniqueKey("QueenDefeated") && ConfigurationFile.queenBenefitEnabled.Value)
                 {
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
 
                     if (!__instance.isActiveAndEnabled || itemData == null) return;
-                    __instance.m_forceField.endRange = 100;
+                    __instance.m_forceField.endRange = ConfigurationFile.queenBenefitRange.Value;
                 }
             }
             catch (Exception ex) {}
