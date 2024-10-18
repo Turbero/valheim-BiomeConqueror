@@ -1,18 +1,15 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
+using static Skills;
+using static Utils;
 
 namespace BiomeConqueror
 {
     [BepInPlugin(GUID, NAME, VERSION)]
-    public class BiomeConqueror
+    public class DetailedLevels : BaseUnityPlugin
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
@@ -36,90 +33,59 @@ namespace BiomeConqueror
     {
         static void Postfix(Character __instance)
         {
-            if (__instance != null && __instance.IsBoss() && __instance.name == "Boss_Queen") //prefab name
+            if (__instance != null && __instance.IsBoss())
             {
-                OnQueenDefeated();
-            }
-            // Verificamos si el personaje muerto es Bonemass por su nombre
-            if (__instance != null && __instance.IsBoss() && __instance.m_name == "$enemy_bonemass")
-            {
-                // Bonemass ha sido derrotado, ejecutar lógica
-                OnBonemassDefeated();
-            }
-        }
-
-        // Método que se ejecuta al derrotar a la Reina
-        public static void OnQueenDefeated()
-        {
-            if (Player.m_localPlayer != null)
-            {
-                // Guardamos el estado de que la Reina ha sido derrotada para este jugador
-                PlayerPrefs.SetInt("QueenDefeated", 1);
-                RemoveMistlandsFog(); // Quitamos la niebla solo para este jugador
-            }
-        }
-        // Método que se ejecuta al derrotar a Bonemass
-        public static void OnBonemassDefeated()
-        {
-            if (Player.m_localPlayer != null)
-            {
-                // Guardamos el estado de que Bonemass ha sido derrotado para este jugador
-                PlayerPrefs.SetInt("BonemassDefeated", 1);
-                RemoveSwampRain(); // Quitamos la lluvia permanente solo para este jugador
-            }
-        }
-
-        public static void CheckAndRemoveFog()
-        {
-            if (PlayerPrefs.GetInt("QueenDefeated", 0) == 1)
-            {
-                // Si el jugador ha derrotado a la Reina, eliminamos la niebla
-                RemoveMistlandsFog();
-            }
-        }
-
-        public static void RemoveMistlandsFog()
-        {
-            // Obtenemos la instancia de EnvMan que controla los efectos climáticos
-            var envMan = EnvMan.instance;
-
-            // Comprobamos si el jugador está en Mistlands
-            if (Player.m_localPlayer != null && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
-            {
-                // Accedemos al entorno actual (EnvSetup) del juego
-                var currentEnv = envMan.GetCurrentEnvironment();
-
-                if (currentEnv != null)
+                if (__instance.m_name == "$enemy_bonemass")
                 {
-                    // Modificamos la densidad de la niebla en Mistlands
-                    currentEnv.m_fogDensityDay = 0f;    // Niebla durante el día
-                    currentEnv.m_fogDensityNight = 0f;  // Niebla durante la noche
-                    currentEnv.m_fogColorDay = Color.clear;  // Color de la niebla durante el día
-                    currentEnv.m_fogColorNight = Color.clear; // Color de la niebla durante la noche
+                    Player.m_localPlayer.AddUniqueKey("BonemassDefeated");
+                    Debug.Log($"** Bonemass defeated");
+                }
+                else if (__instance.m_name == "$enemy_dragon")
+                {
+                    Player.m_localPlayer.AddUniqueKey("ModerDefeated");
+                    Debug.Log($"** Moder defeated");
+                }
+                else if (__instance.m_name == "$enemy_seekerqueen")
+                {
+                    Player.m_localPlayer.AddUniqueKey("QueenDefeated");
+                    Debug.Log($"** Queen defeated");
                 }
             }
         }
+    }
 
-        public static void RemoveSwampRain()
+    [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
+    public class NoRainInSwampsPatch
+    {
+        static void Prefix(EnvMan __instance)
         {
-            // Obtenemos la instancia de EnvMan que controla los efectos climáticos
-            var envMan = EnvMan.instance;
+            Player player = Player.m_localPlayer;
 
-            // Comprobamos si el jugador está en los Pantanos
-            if (Player.m_localPlayer != null && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+            if (player != null)
             {
-                // Accedemos al entorno actual (EnvSetup) del juego
-                var currentEnv = envMan.GetCurrentEnvironment();
-
-                if (currentEnv != null)
+                if (player.GetCurrentBiome() == Heightmap.Biome.Swamp)
                 {
-                    // Ajustamos los efectos visuales de lluvia manipulando el viento y la niebla
-                    currentEnv.m_fogDensityDay = 0f;    // Eliminamos la niebla de día
-                    currentEnv.m_fogDensityNight = 0f;  // Eliminamos la niebla de noche
-
-                    // Reducimos el viento al mínimo, lo que también afecta el ambiente de lluvia
-                    currentEnv.m_windMin = 0f;
-                    currentEnv.m_windMax = 0f;
+                    if (Player.m_localPlayer.HaveUniqueKey("BonemassDefeated"))
+                    {
+                        __instance.GetCurrentEnvironment().m_isWet = false;
+                    }
+                    else
+                    {
+                        __instance.GetCurrentEnvironment().m_isWet = true;
+                    }
+                }
+                else if (player.GetCurrentBiome() == Heightmap.Biome.Mountain)
+                {
+                    if (Player.m_localPlayer.HaveUniqueKey("ModerDefeated"))
+                    {
+                        __instance.GetCurrentEnvironment().m_isFreezing = false;
+                        __instance.GetCurrentEnvironment().m_isFreezingAtNight = false;
+                    }
+                    else
+                    {
+                        __instance.GetCurrentEnvironment().m_isFreezing = true;
+                        __instance.GetCurrentEnvironment().m_isFreezingAtNight = true;
+                    }
                 }
             }
         }
