@@ -16,10 +16,11 @@ namespace BiomeConqueror
         static void Postfix(ref Demister __instance)
         {
             if (!ConfigurationFile.modEnabled.Value) return;
-
+            
             try
             {
-                if (Player.m_localPlayer.HaveUniqueKey("QueenDefeated") && ConfigurationFile.queenBenefitEnabled.Value)
+                if (BiomeConquerorUtils.hasUniqueKey("QueenDefeated", ConfigurationFile.queenBenefitEnabled.Value)/* ||
+                    BiomeConquerorUtils.hasGlobalKey("defeated_queen")*/)
                 {
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
 
