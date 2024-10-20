@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.0.1
+
+* Wisp Light range updated inmediately after defeating the queen or updating the config file range parameter without unequipping/equipping
+* Adding world progression option instead of player own battles
+
 ## 1.0.0
 
 Initial version:
