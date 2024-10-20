@@ -99,4 +99,8 @@
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Debug" del "$(SolutionDir)BiomeConqueror\MODGEN\BiomeConqueror.dll"
+if "$(ConfigurationName)" == "Debug" xcopy "$(TargetPath)" "$(SolutionDir)BiomeConqueror\MODGEN"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
