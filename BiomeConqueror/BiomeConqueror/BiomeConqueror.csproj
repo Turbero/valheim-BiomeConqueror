@@ -81,11 +81,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiomeConqueror.cs" />
+    <Compile Include="BiomeConquerorUtils.cs" />
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MistlandsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeatherPatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MODGEN\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MODGEN\generate_mod.sh" />
+    <None Include="MODGEN\CHANGELOG.md" />
+    <None Include="MODGEN\manifest.json" />
+    <None Include="MODGEN\README.md" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

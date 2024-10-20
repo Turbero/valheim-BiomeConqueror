@@ -7,8 +7,6 @@ namespace BiomeConqueror
     {
         static void Prefix(EnvMan __instance)
         {
-            if (!ConfigurationFile.modEnabled.Value) return;
-
             Player player = Player.m_localPlayer;
 
             if (player != null)
@@ -18,6 +16,10 @@ namespace BiomeConqueror
                     if (BiomeConquerorUtils.hasUniqueKey("BonemassDefeated", ConfigurationFile.bonemassBenefitEnabled.Value)/* || hasGlobalKey("defeated_bonemass")*/)
                     {
                         __instance.GetCurrentEnvironment().m_isWet = false;
+                        if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Wet".GetHashCode()))
+                        {
+                            Player.m_localPlayer.GetSEMan().RemoveStatusEffect("Wet".GetHashCode());
+                        }
                     }
                     else
                     {
