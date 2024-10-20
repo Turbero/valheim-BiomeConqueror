@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using System.Linq;
 
 namespace BiomeConqueror
 {
@@ -8,7 +9,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.1";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -48,6 +49,14 @@ namespace BiomeConqueror
                 {
                     Player.m_localPlayer.AddUniqueKey("QueenDefeated");
                     Logger.Log($"** Queen defeated");
+
+                    var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
+
+                    if (itemData != null)
+                    {
+                        Player.m_localPlayer.UnequipItem(itemData);
+                        Player.m_localPlayer.EquipItem(itemData);
+                    }
                 }
             }
         }

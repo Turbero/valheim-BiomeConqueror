@@ -1,5 +1,7 @@
 ﻿using BepInEx.Configuration;
 using BepInEx;
+using System;
+using System.Linq;
 
 namespace BiomeConqueror
 {
@@ -27,7 +29,17 @@ namespace BiomeConqueror
                 moderBenefitEnabled = config.Bind<bool>("2 - Victories", "ModerBenefitEnabled", true, "Stops freezing without protection effects in all mountains after killing Moder (default = true)");
                 queenBenefitEnabled = config.Bind<bool>("2 - Victories", "QueenBenefitEnabled", true, "Increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitRange = config.Bind<float>("2 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
+
+                queenBenefitRange.SettingChanged += QueenBenefitRange_SettingChanged;
             }
+        }
+
+        private static void QueenBenefitRange_SettingChanged(object sender, EventArgs e)
+        {
+            var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
+            if (itemData == null) return;
+            Player.m_localPlayer.UnequipItem(itemData);
+            Player.m_localPlayer.EquipItem(itemData); // triggers MistlandsPatch
         }
     }
 }
