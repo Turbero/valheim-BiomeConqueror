@@ -13,7 +13,8 @@ namespace BiomeConqueror
             {
                 if (player.GetCurrentBiome() == Heightmap.Biome.Swamp)
                 {
-                    if (BiomeConquerorUtils.hasUniqueKey("BonemassDefeated", ConfigurationFile.bonemassBenefitEnabled.Value)/* || hasGlobalKey("defeated_bonemass")*/)
+                    if (BiomeConquerorUtils.hasUniqueKey("BonemassDefeated", ConfigurationFile.bonemassBenefitEnabled.Value) ||
+                        BiomeConquerorUtils.hasGlobalKey("defeated_bonemass"))
                     {
                         __instance.GetCurrentEnvironment().m_isWet = false;
                         if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Wet".GetHashCode()))
@@ -28,7 +29,8 @@ namespace BiomeConqueror
                 }
                 else if ((player.GetCurrentBiome() == Heightmap.Biome.Mountain))
                 {
-                    if (BiomeConquerorUtils.hasUniqueKey("ModerDefeated", ConfigurationFile.moderBenefitEnabled.Value)/* || hasGlobalKey("defeated_dragon")*/)
+                    if (BiomeConquerorUtils.hasUniqueKey("ModerDefeated", ConfigurationFile.moderBenefitEnabled.Value) ||
+                        BiomeConquerorUtils.hasGlobalKey("defeated_dragon"))
                     {
                         __instance.GetCurrentEnvironment().m_isFreezing = false;
                         __instance.GetCurrentEnvironment().m_isFreezingAtNight = false;

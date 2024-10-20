@@ -10,7 +10,7 @@
 
         public static bool hasGlobalKey(string key)
         {
-            return ConfigurationFile.modEnabled.Value && //ConfigurationFile.serverProgress.Value &&
+            return ConfigurationFile.modEnabled.Value && ConfigurationFile.worldProgression.Value &&
                 ZoneSystem.instance.GetGlobalKey(key);
         }
     }
