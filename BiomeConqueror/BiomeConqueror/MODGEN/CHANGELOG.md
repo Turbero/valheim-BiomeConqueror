@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.0.2
+
+* Description added under "Active effects" in Valheim Compendium to track the new effects
+
 ## 1.0.1
 
 * Wisp Light range updated inmediately after defeating the queen or updating the config file range parameter without unequipping/equipping

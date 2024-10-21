@@ -45,6 +45,8 @@ O pregúntame en mis canales personales:
 * Turbeheim: https://discord.gg/JKQR3EWRbU
 * Más Turbero: https://discord.gg/y67YeVw62K
 
+![](https://i.imgur.com/4UA4KbT.png)
+
 ![](https://i.imgur.com/XigIsNe.png)
 
 ![](https://i.imgur.com/E5UUMDu.png)
