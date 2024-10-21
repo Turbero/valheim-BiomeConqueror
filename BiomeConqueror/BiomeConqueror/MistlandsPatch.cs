@@ -19,8 +19,7 @@ namespace BiomeConqueror
             
             try
             {
-                if (BiomeConquerorUtils.hasUniqueKey("QueenDefeated", ConfigurationFile.queenBenefitEnabled.Value) ||
-                    BiomeConquerorUtils.hasGlobalKey("defeated_queen"))
+                if (BiomeConquerorUtils.isQueenDefeatedForPlayer())
                 {
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
 
