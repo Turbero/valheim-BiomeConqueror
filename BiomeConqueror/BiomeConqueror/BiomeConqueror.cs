@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.0.2";
+        public const string VERSION = "1.0.3";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -55,7 +55,6 @@ namespace BiomeConqueror
                     Logger.Log($"** Queen defeated");
 
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
-
                     if (itemData != null)
                     {
                         Player.m_localPlayer.UnequipItem(itemData);
@@ -76,7 +75,6 @@ namespace BiomeConqueror
 
         static void Postfix(ref TextsDialog __instance)
         {
-            //__instance.m_text
             var field = typeof(TextsDialog).GetField("m_texts", BindingFlags.NonPublic | BindingFlags.Instance);
             List<TextInfo> texts = (List<TextInfo>)field.GetValue(__instance);
             TextInfo activeEffectsText = texts[0];
@@ -95,19 +93,19 @@ namespace BiomeConqueror
                 if (benefitBonemass)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_bonemass_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitModer)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_moder_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitQueen)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_queen_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = +" + ConfigurationFile.queenBenefitRange.Value + "m.");
+                    stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.");
                     stringBuilder.Append("\n");
                 }
 

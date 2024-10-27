@@ -16,19 +16,19 @@
 
         public static bool isBonemassDefeatedForPlayer()
         {
-            return hasUniqueKey("BonemassDefeated", ConfigurationFile.bonemassBenefitEnabled.Value) ||
+            return hasUniqueKey("BonemassDefeated", ConfigurationFile.bonemassBenefitEligibleEnabled.Value) ||
                    hasGlobalKey("defeated_bonemass");
         }
 
         public static bool isModerDefeatedForPlayer()
         {
-            return hasUniqueKey("ModerDefeated", ConfigurationFile.moderBenefitEnabled.Value) ||
+            return hasUniqueKey("ModerDefeated", ConfigurationFile.moderBenefitEligibleEnabled.Value) ||
                    hasGlobalKey("defeated_dragon");
         }
 
         public static bool isQueenDefeatedForPlayer()
         {
-            return hasUniqueKey("QueenDefeated", ConfigurationFile.queenBenefitEnabled.Value) ||
+            return hasUniqueKey("QueenDefeated", ConfigurationFile.queenBenefitEligibleEnabled.Value) ||
                    hasGlobalKey("defeated_queen");
         }
     }

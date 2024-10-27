@@ -10,10 +10,10 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> modEnabled;
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<bool> worldProgression;
-        public static ConfigEntry<bool> bonemassBenefitEnabled;
-        public static ConfigEntry<bool> moderBenefitEnabled;
-        public static ConfigEntry<bool> queenBenefitEnabled;
-        public static ConfigEntry<float> queenBenefitRange;
+        public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
+        public static ConfigEntry<bool> moderBenefitEligibleEnabled;
+        public static ConfigEntry<bool> queenBenefitEligibleEnabled;
+        public static ConfigEntry<float> queenBenefitEligibleRange;
 
         private static ConfigFile config;
 
@@ -25,13 +25,13 @@ namespace BiomeConqueror
                 modEnabled = config.Bind<bool>("1 - General", "Enabled", true, "Enabling/Disabling the mod (default = true)");
                 debug = config.Bind<bool>("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)");
                 worldProgression = config.Bind<bool>("1 - General", "WorldProgression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
-                bonemassBenefitEnabled = config.Bind<bool>("2 - Victories", "BonemassBenefitEnabled", true, "Stops getting wet by rain in all swamps after killing Bonemass (default = true)");
-                moderBenefitEnabled = config.Bind<bool>("2 - Victories", "ModerBenefitEnabled", true, "Stops freezing without protection effects in all mountains after killing Moder (default = true)");
-                queenBenefitEnabled = config.Bind<bool>("2 - Victories", "QueenBenefitEnabled", true, "Increases the wisp light range after killing The Seeker Queen (default = true)");
-                queenBenefitRange = config.Bind<float>("2 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
+                bonemassBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
+                moderBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
+                queenBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
+                queenBenefitEligibleRange = config.Bind<float>("2 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
 
                 worldProgression.SettingChanged += QueenBenefitRange_SettingChanged;
-                queenBenefitRange.SettingChanged += QueenBenefitRange_SettingChanged;
+                queenBenefitEligibleRange.SettingChanged += QueenBenefitRange_SettingChanged;
             }
         }
 

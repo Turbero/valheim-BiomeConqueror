@@ -24,7 +24,7 @@ namespace BiomeConqueror
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
 
                     if (!__instance.isActiveAndEnabled || itemData == null) return;
-                    __instance.m_forceField.endRange = ConfigurationFile.queenBenefitRange.Value;
+                    __instance.m_forceField.endRange = ConfigurationFile.queenBenefitEligibleRange.Value;
                 }
             }
             catch (Exception ex) {}
