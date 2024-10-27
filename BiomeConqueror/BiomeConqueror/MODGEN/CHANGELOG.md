@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.0.3
+
+* Small fix for configuration file names and compendium texts to avoid confusion.
+
 ## 1.0.2
 
 * Description added under "Active effects" in Valheim Compendium to track the new effects

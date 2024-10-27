@@ -1,4 +1,4 @@
-set next_version="1.0.2"
+set next_version="1.0.3"
 set folder_name="MODGEN"
 
 set FILETOZIP="%~dp0%folder_name%"

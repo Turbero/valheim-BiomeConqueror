@@ -1,6 +1,6 @@
 {
     "name": "BiomeConqueror",
-    "version_number": "1.0.2",
+    "version_number": "1.0.3",
     "website_url": "https://github.com/Turbero/valheim-BiomeConqueror",
     "description": "Mod for progression benefits after defeating biome bosses.",
     "dependencies": [
