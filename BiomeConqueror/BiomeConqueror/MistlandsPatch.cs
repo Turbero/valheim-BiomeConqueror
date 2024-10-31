@@ -8,6 +8,8 @@ namespace BiomeConqueror
     [HarmonyPatch]
     public class MistlandsPatch
     {
+        public static float demisterRange;
+
         static MethodBase TargetMethod()
         {
             return AccessTools.Method(typeof(Demister), "OnEnable");
@@ -26,8 +28,20 @@ namespace BiomeConqueror
                     if (!__instance.isActiveAndEnabled || itemData == null) return;
                     __instance.m_forceField.endRange = ConfigurationFile.queenBenefitEligibleRange.Value;
                 }
+                demisterRange = __instance.m_forceField.endRange;
+
+                updateDemisterBuffText(__instance);
             }
             catch (Exception ex) {}
         }
+
+        private static void updateDemisterBuffText(Demister __instance)
+        {
+            var demisterSE = Player.m_localPlayer.GetSEMan().GetStatusEffects().First(effect => effect.name == "Demister");
+            demisterSE.m_name = $"$item_demister : {demisterRange} m.";
+            Logger.Log($"demister buff text updated to {demisterSE.m_name}");
+        }
     }
+
+
 }
