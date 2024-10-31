@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.0.4
+
+* Wisp buff text updated to show the distance that the demister can cover in meters, giving better understanding of the area with fog removed.
+
 ## 1.0.3
 
 * Small fix for configuration file names and compendium texts to avoid confusion.
