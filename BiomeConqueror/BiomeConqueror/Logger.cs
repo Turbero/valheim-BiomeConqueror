@@ -11,22 +11,19 @@ namespace BiomeConqueror
                 return;
             }
 
-            var toPrint = $"{BiomeConqueror.NAME} {BiomeConqueror.VERSION}: {(s != null ? s.ToString() : "null")}";
-
+            var toPrint = $"[{BiomeConqueror.NAME} {BiomeConqueror.VERSION}]: {(s != null ? s.ToString() : "null")}";
             Debug.Log(toPrint);
         }
 
         internal static void LogWarning(object s)
         {
-            var toPrint = $"{BiomeConqueror.NAME} {BiomeConqueror.VERSION}: {(s != null ? s.ToString() : "null")}";
-
+            var toPrint = $"[{BiomeConqueror.NAME} {BiomeConqueror.VERSION}]: {(s != null ? s.ToString() : "null")}";
             Debug.LogWarning(toPrint);
         }
 
         internal static void LogError(object s)
         {
-            var toPrint = $"{BiomeConqueror.NAME} {BiomeConqueror.VERSION}: {(s != null ? s.ToString() : "null")}";
-
+            var toPrint = $"[{BiomeConqueror.NAME} {BiomeConqueror.VERSION}]: {(s != null ? s.ToString() : "null")}";
             Debug.LogError(toPrint);
         }
     }

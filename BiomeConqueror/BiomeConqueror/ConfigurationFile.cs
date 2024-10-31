@@ -30,17 +30,22 @@ namespace BiomeConqueror
                 queenBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitEligibleRange = config.Bind<float>("2 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
 
+                modEnabled.SettingChanged += QueenBenefitRange_SettingChanged;
                 worldProgression.SettingChanged += QueenBenefitRange_SettingChanged;
+                queenBenefitEligibleEnabled.SettingChanged += QueenBenefitRange_SettingChanged;
                 queenBenefitEligibleRange.SettingChanged += QueenBenefitRange_SettingChanged;
             }
         }
 
         private static void QueenBenefitRange_SettingChanged(object sender, EventArgs e)
         {
-            var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
-            if (itemData == null) return;
-            Player.m_localPlayer.UnequipItem(itemData);
-            Player.m_localPlayer.EquipItem(itemData); // triggers MistlandsPatch
+            if (modEnabled.Value)
+            {
+                var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
+                if (itemData == null) return;
+                Player.m_localPlayer.UnequipItem(itemData);
+                Player.m_localPlayer.EquipItem(itemData); // triggers MistlandsPatch
+            }
         }
     }
 }
