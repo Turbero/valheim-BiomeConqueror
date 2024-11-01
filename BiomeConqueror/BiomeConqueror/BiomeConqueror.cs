@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.0.4";
+        public const string VERSION = "1.0.5";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -49,6 +49,11 @@ namespace BiomeConqueror
                     Player.m_localPlayer.AddUniqueKey("ModerDefeated");
                     Logger.Log($"** Moder defeated");
                 }
+                else if (__instance.m_name == "$enemy_goblinking")
+                {
+                    Player.m_localPlayer.AddUniqueKey("YagluthDefeated");
+                    Logger.Log($"** Yagluth defeated");
+                }
                 else if (__instance.m_name == "$enemy_seekerqueen")
                 {
                     Player.m_localPlayer.AddUniqueKey("QueenDefeated");
@@ -83,6 +88,7 @@ namespace BiomeConqueror
 
             var benefitBonemass = BiomeConquerorUtils.isBonemassDefeatedForPlayer();
             var benefitModer = BiomeConquerorUtils.isModerDefeatedForPlayer();
+            var benefitYagluth = BiomeConquerorUtils.isYagluthDefeatedForPlayer();
             var benefitQueen = BiomeConquerorUtils.isQueenDefeatedForPlayer();
 
             if (benefitBonemass || benefitModer || benefitQueen) {
@@ -100,6 +106,12 @@ namespace BiomeConqueror
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_moder_name") + "</color>\n");
                     stringBuilder.Append(Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append("\n");
+                }
+                if (benefitYagluth)
+                {
+                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_yagluth_name") + "</color>\n");
+                    stringBuilder.Append(Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitQueen)

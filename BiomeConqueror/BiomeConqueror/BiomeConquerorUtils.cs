@@ -26,6 +26,12 @@
                    hasGlobalKey("defeated_dragon");
         }
 
+        public static bool isYagluthDefeatedForPlayer()
+        {
+            return hasUniqueKey("YagluthDefeated", ConfigurationFile.yagluthBenefitEligibleEnabled.Value) ||
+                   hasGlobalKey("defeated_goblinking");
+        }
+
         public static bool isQueenDefeatedForPlayer()
         {
             return hasUniqueKey("QueenDefeated", ConfigurationFile.queenBenefitEligibleEnabled.Value) ||

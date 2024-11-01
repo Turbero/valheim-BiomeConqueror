@@ -12,6 +12,7 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> worldProgression;
         public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
+        public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
         public static ConfigEntry<bool> queenBenefitEligibleEnabled;
         public static ConfigEntry<float> queenBenefitEligibleRange;
 
@@ -27,6 +28,7 @@ namespace BiomeConqueror
                 worldProgression = config.Bind<bool>("1 - General", "WorldProgression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
                 bonemassBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
                 moderBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
+                yagluthBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
                 queenBenefitEligibleEnabled = config.Bind<bool>("2 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitEligibleRange = config.Bind<float>("2 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
 
