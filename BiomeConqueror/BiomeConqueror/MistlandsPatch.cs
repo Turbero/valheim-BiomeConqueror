@@ -30,16 +30,12 @@ namespace BiomeConqueror
                 }
                 demisterRange = __instance.m_forceField.endRange;
 
-                updateDemisterBuffText(__instance);
+                //Update wisp light buff text
+                var demisterSE = Player.m_localPlayer.GetSEMan().GetStatusEffects().First(effect => effect.name == "Demister");
+                demisterSE.m_name = $"$item_demister" + ": {demisterRange}m.";
+                Logger.Log($"demister buff text updated to {demisterSE.m_name}");
             }
             catch (Exception ex) {}
-        }
-
-        private static void updateDemisterBuffText(Demister __instance)
-        {
-            var demisterSE = Player.m_localPlayer.GetSEMan().GetStatusEffects().First(effect => effect.name == "Demister");
-            demisterSE.m_name = $"$item_demister : {demisterRange} m.";
-            Logger.Log($"demister buff text updated to {demisterSE.m_name}");
         }
     }
 

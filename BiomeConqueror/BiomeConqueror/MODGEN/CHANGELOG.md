@@ -1,8 +1,10 @@
 ### CHANGELOG
 
-## 1.0.5
+## 1.1.0
 
 * Added new benefit when Yagluth is defeated. After defeating it, you will no longer be attacked by deathsquitos.
+* Added option to show benefits as buffs in the player buffs when you enter the corresponding biome.
+* 
 
 ## 1.0.4
 

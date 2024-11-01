@@ -86,10 +86,12 @@
     <Compile Include="AshlandsPatch.cs" />
     <Compile Include="BiomeConqueror.cs" />
     <Compile Include="BiomeConquerorUtils.cs" />
+    <Compile Include="Compendium.cs" />
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MistlandsPatch.cs" />
     <Compile Include="PlainsPatch.cs" />
+    <Compile Include="PlayerBuffs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeatherPatch.cs" />
   </ItemGroup>

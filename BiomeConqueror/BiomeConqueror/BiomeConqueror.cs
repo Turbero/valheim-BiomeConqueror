@@ -1,10 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using static TextsDialog;
 
 namespace BiomeConqueror
 {
@@ -13,7 +10,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.0.5";
+        public const string VERSION = "1.1.0";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -39,25 +36,34 @@ namespace BiomeConqueror
 
             if (__instance != null && __instance.IsBoss())
             {
+                Logger.Log($"defeated name: {__instance.m_name}");
                 if (__instance.m_name == "$enemy_bonemass")
                 {
                     Player.m_localPlayer.AddUniqueKey("BonemassDefeated");
                     Logger.Log($"** Bonemass defeated");
+                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
                 }
                 else if (__instance.m_name == "$enemy_dragon")
                 {
                     Player.m_localPlayer.AddUniqueKey("ModerDefeated");
                     Logger.Log($"** Moder defeated");
+                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
+                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
                 }
                 else if (__instance.m_name == "$enemy_goblinking")
                 {
                     Player.m_localPlayer.AddUniqueKey("YagluthDefeated");
                     Logger.Log($"** Yagluth defeated");
+                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
+                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
                 }
                 else if (__instance.m_name == "$enemy_seekerqueen")
                 {
                     Player.m_localPlayer.AddUniqueKey("QueenDefeated");
                     Logger.Log($"** Queen defeated");
+                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
+                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
 
                     var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
                     if (itemData != null)
@@ -70,59 +76,32 @@ namespace BiomeConqueror
         }
     }
 
-    [HarmonyPatch]
-    public class TextsDialogActiveEffectsPatch
+    [HarmonyPatch(typeof(Player), nameof(Player.OnSpawned))]
+    public class Player_OnSpawned_Patch
     {
+        static void Postfix(Player __instance, bool spawnValkyrie)
+        {
+            PlayerBuffs.ActivateCurrentBiomeBenefitBuff();
+        }
+    }
+    
+    [HarmonyPatch(typeof(EnvMan))]
+    public static class BiomeChangePatch
+    {
+        private static Heightmap.Biome previousBiome;
+
         static MethodBase TargetMethod()
         {
-            return AccessTools.Method(typeof(TextsDialog), "AddActiveEffects");
+            return AccessTools.Method(typeof(EnvMan), "UpdateEnvironment");
         }
 
-        static void Postfix(ref TextsDialog __instance)
+        public static void Postfix(long sec, Heightmap.Biome biome)
         {
-            var field = typeof(TextsDialog).GetField("m_texts", BindingFlags.NonPublic | BindingFlags.Instance);
-            List<TextInfo> texts = (List<TextInfo>)field.GetValue(__instance);
-            TextInfo activeEffectsText = texts[0];
-
-            string currentText = activeEffectsText.m_text;
-
-            var benefitBonemass = BiomeConquerorUtils.isBonemassDefeatedForPlayer();
-            var benefitModer = BiomeConquerorUtils.isModerDefeatedForPlayer();
-            var benefitYagluth = BiomeConquerorUtils.isYagluthDefeatedForPlayer();
-            var benefitQueen = BiomeConquerorUtils.isQueenDefeatedForPlayer();
-
-            if (benefitBonemass || benefitModer || benefitQueen) {
-
-                StringBuilder stringBuilder = new StringBuilder(256);
-                stringBuilder.Append("\n\n");
-                stringBuilder.Append("<color=yellow>BiomeConqueror Mod</color>\n");
-                if (benefitBonemass)
-                {
-                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_bonemass_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none"));
-                    stringBuilder.Append("\n");
-                }
-                if (benefitModer)
-                {
-                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_moder_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none"));
-                    stringBuilder.Append("\n");
-                }
-                if (benefitYagluth)
-                {
-                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_yagluth_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none"));
-                    stringBuilder.Append("\n");
-                }
-                if (benefitQueen)
-                {
-                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_queen_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.");
-                    stringBuilder.Append("\n");
-                }
-
-                texts.RemoveAt(0);
-                texts.Insert(0, new TextInfo(Localization.instance.Localize("$inventory_activeeffects"), currentText + stringBuilder.ToString()));
+            if (biome != previousBiome)
+            {
+                Logger.Log($"Biome changed: {previousBiome} -> {biome}");
+                previousBiome = biome;
+                PlayerBuffs.ActivateCurrentBiomeBenefitBuff();
             }
         }
     }
