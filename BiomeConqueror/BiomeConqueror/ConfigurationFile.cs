@@ -54,22 +54,7 @@ namespace BiomeConqueror
                 PlayerBuffs.RemoveAllBenefitBuffs();
             } else
             {
-                if (BiomeConquerorUtils.isBonemassDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
-                }
-                if (BiomeConquerorUtils.isModerDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
-                }
-                if (BiomeConquerorUtils.isYagluthDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
-                }
-                if (BiomeConquerorUtils.isQueenDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
-                }
+                PlayerBuffs.AddPlayerBiomeBenefitBuff();
             }
         }
 
@@ -78,22 +63,7 @@ namespace BiomeConqueror
             if (modEnabled.Value)
             {
                 PlayerBuffs.RemoveAllBenefitBuffs();
-                if (BiomeConquerorUtils.isBonemassDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
-                }
-                if (BiomeConquerorUtils.isModerDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
-                }
-                if (BiomeConquerorUtils.isYagluthDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
-                }
-                if (BiomeConquerorUtils.isQueenDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
-                {
-                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
-                }
+                PlayerBuffs.AddPlayerBiomeBenefitBuff();
 
                 var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
                 if (itemData == null) return;

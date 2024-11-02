@@ -2,21 +2,12 @@
 using System;
 using UnityEngine;
 using HarmonyLib;
-using static Skills;
 
 namespace BiomeConqueror
 {
     public class PlayerBuffs
     {
         private static Dictionary<string, Sprite> cachedSprites = new Dictionary<string, Sprite>();
-
-        // active status effects
-        public static List<string> benefitBuffsDef = new List<string> {
-            "$event_boss03_end",
-            "$event_boss04_end",
-            "$event_boss05_end",
-            "$enemy_boss_queen_deathmessage"
-         };
 
         public static void AddBenefitBuff(Player player, string name, string spriteName)
         {
@@ -39,44 +30,27 @@ namespace BiomeConqueror
             Logger.Log($"Added buff: {customBuff.m_name}");
         }
 
-        private static string getBenefitTooltipBySpriteName(string spriteName)
-        {
-            if (spriteName == "TrophyBonemass")
-            {
-                return Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none");
-            }else if (spriteName == "TrophyDragonQueen")
-            {
-                return Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none");
-            }
-            else if (spriteName == "TrophyGoblinKing")
-            {
-                return Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none");
-            }
-            else if (spriteName == "TrophySeekerQueen")
-            {
-                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.";
-            }
-            return "";
-        }
-
         public static void RemoveAllBenefitBuffs()
         {
+            List<string> benefitBuffsDef = new List<string> {
+                "$event_boss03_end",
+                "$event_boss04_end",
+                "$event_boss05_end",
+                "$enemy_boss_queen_deathmessage"
+             };
+
             foreach (var def in benefitBuffsDef)
             {
-                RemoveBenefitBuffIfExists(Player.m_localPlayer, def);
-            }
-        }
+                Player player = Player.m_localPlayer;
+                SEMan seMan = player.GetSEMan();
 
-        public static void RemoveBenefitBuffIfExists(Player player, string name)
-        {
-            SEMan seMan = player.GetSEMan();
-
-            // Find and delete buff
-            StatusEffect existingBuff = seMan.GetStatusEffect(name.GetHashCode());
-            if (existingBuff != null)
-            {
-                seMan.RemoveStatusEffect(existingBuff);
-                Logger.Log($"Deleted buff: {existingBuff.m_name}");
+                // Find and delete buff
+                StatusEffect existingBuff = seMan.GetStatusEffect(def.GetHashCode());
+                if (existingBuff != null)
+                {
+                    seMan.RemoveStatusEffect(existingBuff);
+                    Logger.Log($"Deleted buff: {existingBuff.m_name}");
+                }
             }
         }
 
@@ -105,6 +79,26 @@ namespace BiomeConqueror
             }
         }
 
+        private static string getBenefitTooltipBySpriteName(string spriteName)
+        {
+            if (spriteName == "TrophyBonemass")
+            {
+                return Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none");
+            }else if (spriteName == "TrophyDragonQueen")
+            {
+                return Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none");
+            }
+            else if (spriteName == "TrophyGoblinKing")
+            {
+                return Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none");
+            }
+            else if (spriteName == "TrophySeekerQueen")
+            {
+                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.";
+            }
+            return "";
+        }
+
         public static void ActivateCurrentBiomeBenefitBuff()
         {
             if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
@@ -126,6 +120,26 @@ namespace BiomeConqueror
             else
             {
                 RemoveAllBenefitBuffs();
+            }
+        }
+
+        public static void AddPlayerBiomeBenefitBuff()
+        {
+            if (BiomeConquerorUtils.isBonemassDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
+            }
+            else if (BiomeConquerorUtils.isModerDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
+            }
+            else if (BiomeConquerorUtils.isYagluthDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
+            }
+            else if (BiomeConquerorUtils.isQueenDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
             }
         }
     }
