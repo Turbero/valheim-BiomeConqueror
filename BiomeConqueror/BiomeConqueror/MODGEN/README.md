@@ -1,6 +1,9 @@
 # Biome Conqueror
 
-Showcase link: https://www.youtube.com/watch?v=REf7-5lfv7w
+Showcase links:
+
+- Latest version: https://www.youtube.com/watch?v=dC45L3l9jJU
+- Old version: https://www.youtube.com/watch?v=REf7-5lfv7w
 
 [ENG]
 
