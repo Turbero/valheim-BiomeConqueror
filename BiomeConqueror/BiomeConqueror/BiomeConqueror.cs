@@ -81,7 +81,7 @@ namespace BiomeConqueror
     {
         static void Postfix(Player __instance, bool spawnValkyrie)
         {
-            PlayerBuffs.ActivateCurrentBiomeBenefitBuff();
+            PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
         }
     }
     
@@ -101,7 +101,7 @@ namespace BiomeConqueror
             {
                 Logger.Log($"Biome changed: {previousBiome} -> {biome}");
                 previousBiome = biome;
-                PlayerBuffs.ActivateCurrentBiomeBenefitBuff();
+                PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
             }
         }
     }

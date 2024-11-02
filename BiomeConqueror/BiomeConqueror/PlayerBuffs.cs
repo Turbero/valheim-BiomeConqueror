@@ -7,6 +7,15 @@ namespace BiomeConqueror
 {
     public class PlayerBuffs
     {
+        public static readonly string BONEMASS_DEFEATED_MESSAGE_KEY = "$event_boss03_end";
+        public static readonly string MODER_DEFEATED_MESSAGE_KEY    = "$event_boss04_end";
+        public static readonly string YAGLUTH_DEFEATED_MESSAGE_KEY  = "$event_boss05_end";
+        public static readonly string QUEEN_DEFEATED_MESSAGE_KEY    = "$enemy_boss_queen_deathmessage";
+        public static readonly string TROPHY_BONEMASS = "TrophyBonemass";
+        public static readonly string TROPHY_MODER    = "TrophyDragonQueen";
+        public static readonly string TROPHY_YAGLUTH  = "TrophyGoblinKing";
+        public static readonly string TROPHY_QUEEN    = "TrophySeekerQueen";
+
         private static Dictionary<string, Sprite> cachedSprites = new Dictionary<string, Sprite>();
 
         public static void AddBenefitBuff(Player player, string name, string spriteName)
@@ -33,10 +42,10 @@ namespace BiomeConqueror
         public static void RemoveAllBenefitBuffs()
         {
             List<string> benefitBuffsDef = new List<string> {
-                "$event_boss03_end",
-                "$event_boss04_end",
-                "$event_boss05_end",
-                "$enemy_boss_queen_deathmessage"
+                BONEMASS_DEFEATED_MESSAGE_KEY,
+                MODER_DEFEATED_MESSAGE_KEY,
+                YAGLUTH_DEFEATED_MESSAGE_KEY,
+                QUEEN_DEFEATED_MESSAGE_KEY
              };
 
             foreach (var def in benefitBuffsDef)
@@ -81,41 +90,41 @@ namespace BiomeConqueror
 
         private static string getBenefitTooltipBySpriteName(string spriteName)
         {
-            if (spriteName == "TrophyBonemass")
+            if (spriteName == TROPHY_BONEMASS)
             {
                 return Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none");
-            }else if (spriteName == "TrophyDragonQueen")
+            }else if (spriteName == TROPHY_MODER)
             {
                 return Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none");
             }
-            else if (spriteName == "TrophyGoblinKing")
+            else if (spriteName == TROPHY_YAGLUTH)
             {
                 return Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none");
             }
-            else if (spriteName == "TrophySeekerQueen")
+            else if (spriteName == TROPHY_QUEEN)
             {
                 return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.";
             }
             return "";
         }
 
-        public static void ActivateCurrentBiomeBenefitBuff()
+        public static void ActivateCurrentEnvBiomeBenefitBuff()
         {
             if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Mountain && BiomeConquerorUtils.isModerDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Plains && BiomeConquerorUtils.isYagluthDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
             }
             else
             {
@@ -125,21 +134,21 @@ namespace BiomeConqueror
 
         public static void AddPlayerBiomeBenefitBuff()
         {
-            if (BiomeConquerorUtils.isBonemassDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+            if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
-            else if (BiomeConquerorUtils.isModerDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
+            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain && BiomeConquerorUtils.isModerDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
             }
-            else if (BiomeConquerorUtils.isYagluthDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
+            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains && BiomeConquerorUtils.isYagluthDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
             }
-            else if (BiomeConquerorUtils.isQueenDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
+            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
             }
         }
     }
