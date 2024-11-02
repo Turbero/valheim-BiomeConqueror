@@ -34,9 +34,12 @@ namespace BiomeConqueror
                 queenBenefitEligibleEnabled = config.Bind<bool>("3 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitEligibleRange = config.Bind<float>("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = true)");
 
-                benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
                 modEnabled.SettingChanged += Configuration_SettingChanged;
                 worldProgression.SettingChanged += Configuration_SettingChanged;
+                benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
+                bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                yagluthBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleRange.SettingChanged += Configuration_SettingChanged;
             }
@@ -74,6 +77,24 @@ namespace BiomeConqueror
         {
             if (modEnabled.Value)
             {
+                PlayerBuffs.RemoveAllBenefitBuffs();
+                if (BiomeConquerorUtils.isBonemassDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+                {
+                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
+                }
+                if (BiomeConquerorUtils.isModerDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
+                {
+                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
+                }
+                if (BiomeConquerorUtils.isYagluthDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
+                {
+                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
+                }
+                if (BiomeConquerorUtils.isQueenDefeatedForPlayer() && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
+                {
+                    PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
+                }
+
                 var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
                 if (itemData == null) return;
                 Player.m_localPlayer.UnequipItem(itemData);
