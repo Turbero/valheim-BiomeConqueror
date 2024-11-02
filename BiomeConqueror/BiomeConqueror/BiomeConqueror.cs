@@ -1,7 +1,9 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using System.Linq;
+using System;
 using System.Reflection;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace BiomeConqueror
 {
@@ -25,51 +27,62 @@ namespace BiomeConqueror
         {
             harmony.UnpatchSelf();
         }
+        void Update()
+        {
+            if (!Player.m_localPlayer || !InventoryGui.instance) return;
+
+            // Check if certain keys are hit to close Almanac GUI
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab) || Player.m_localPlayer.IsDead())
+            {
+                InventoryGui.instance.m_textsDialog.gameObject.SetActive(false);
+            }
+
+            // Hotkey to open/close skills dialog (if game is not paused)
+            if (Input.GetKeyDown(ConfigurationFile.hotKey.Value) && Time.timeScale > 0)
+            {
+                if (InventoryGui.instance.m_textsDialog.gameObject.activeSelf)
+                {
+                    InventoryGui.instance.m_textsDialog.gameObject.SetActive(false);
+                    InventoryGui.instance.Hide();
+                }
+                else
+                {
+                    InventoryGui.instance.Show(null);
+                    _ = WaitForSecondsAsync(0.15f); // Small delay to avoid coroutine issue in log to wait for showing skills dialog until it is active
+                }
+            }
+        }
+        private static async Task WaitForSecondsAsync(float seconds)
+        {
+            await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milisegundos
+            InventoryGui.instance.m_textsDialog.Setup(Player.m_localPlayer);
+            InventoryGui.instance.m_textsDialog.gameObject.SetActive(true);
+        }
     }
 
-    [HarmonyPatch(typeof(Character), "OnDeath")]
-    public class CharacterDeathPatch
+    [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Show))]
+    public class InventoryGui_Show_Patch
     {
-        static void Postfix(Character __instance)
+        static void Postfix(InventoryGui __instance)
         {
             if (!ConfigurationFile.modEnabled.Value) return;
 
-            if (__instance != null && __instance.IsBoss())
+            if (__instance.m_player != null)
             {
-                Logger.Log($"defeated name: {__instance.m_name}");
-                if (__instance.m_name == "$enemy_bonemass")
+                var transform = __instance
+                    .transform.Find("root")
+                    .transform.Find("Info")
+                    .transform.Find("Texts");
+                if (transform != null)
                 {
-                    Player.m_localPlayer.AddUniqueKey("BonemassDefeated");
-                    Logger.Log($"** Bonemass defeated");
-                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
-                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss03_end", "TrophyBonemass");
-                }
-                else if (__instance.m_name == "$enemy_dragon")
-                {
-                    Player.m_localPlayer.AddUniqueKey("ModerDefeated");
-                    Logger.Log($"** Moder defeated");
-                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
-                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss04_end", "TrophyDragonQueen");
-                }
-                else if (__instance.m_name == "$enemy_goblinking")
-                {
-                    Player.m_localPlayer.AddUniqueKey("YagluthDefeated");
-                    Logger.Log($"** Yagluth defeated");
-                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
-                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$event_boss05_end", "TrophyGoblinKing");
-                }
-                else if (__instance.m_name == "$enemy_seekerqueen")
-                {
-                    Player.m_localPlayer.AddUniqueKey("QueenDefeated");
-                    Logger.Log($"** Queen defeated");
-                    if (ConfigurationFile.benefitIcons.Value && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
-                        PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, "$enemy_boss_queen_deathmessage", "TrophySeekerQueen");
+                    UITooltip buttonTooltip = transform.GetComponent<UITooltip>();
 
-                    var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
-                    if (itemData != null)
+                    if (buttonTooltip != null)
                     {
-                        Player.m_localPlayer.UnequipItem(itemData);
-                        Player.m_localPlayer.EquipItem(itemData);
+                        string originalTooltip = "$inventory_texts";
+                        string customText = $" ({ConfigurationFile.hotKey.Value})";
+
+                        buttonTooltip.m_text = originalTooltip + customText;
                     }
                 }
             }

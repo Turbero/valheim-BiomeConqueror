@@ -2,6 +2,7 @@
 using BepInEx;
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace BiomeConqueror
 {
@@ -9,6 +10,7 @@ namespace BiomeConqueror
     {
         public static ConfigEntry<bool> modEnabled;
         public static ConfigEntry<bool> debug;
+        public static ConfigEntry<KeyCode> hotKey;
         public static ConfigEntry<bool> worldProgression;
         public static ConfigEntry<bool> benefitIcons;
         public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
@@ -27,6 +29,7 @@ namespace BiomeConqueror
                 modEnabled = config.Bind<bool>("1 - General", "Enabled", true, "Enabling/Disabling the mod (default = true)");
                 debug = config.Bind<bool>("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)");
                 worldProgression = config.Bind<bool>("2 - Config", "WorldProgression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
+                hotKey = config.Bind<KeyCode>("2 - Config", "HotKey", KeyCode.F3, "Hot key to open the compendium (default = F3)");
                 benefitIcons = config.Bind<bool>("2 - Config", "BenefitIcons", false, "Enabling/Disabling the benefits as permanent buffs (default = false)");
                 bonemassBenefitEligibleEnabled = config.Bind<bool>("3 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
                 moderBenefitEligibleEnabled = config.Bind<bool>("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
