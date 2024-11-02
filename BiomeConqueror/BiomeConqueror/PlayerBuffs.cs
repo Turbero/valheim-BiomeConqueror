@@ -102,21 +102,24 @@ namespace BiomeConqueror
 
         public static void ActivateCurrentEnvBiomeBenefitBuff()
         {
+            Player player = Player.m_localPlayer;
+            if (player == null) return;
+
             if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Mountain && BiomeConquerorUtils.isModerDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Plains && BiomeConquerorUtils.isYagluthDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
             }
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
-                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
             }
             else
             {
@@ -126,19 +129,22 @@ namespace BiomeConqueror
 
         public static void AddPlayerBiomeBenefitBuff()
         {
-            if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
+            Player player = Player.m_localPlayer;
+            if (player == null) return;
+
+            if (player.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
-            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain && BiomeConquerorUtils.isModerDefeatedForPlayer())
+            else if (player.GetCurrentBiome() == Heightmap.Biome.Mountain && BiomeConquerorUtils.isModerDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
             }
-            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains && BiomeConquerorUtils.isYagluthDefeatedForPlayer())
+            else if (player.GetCurrentBiome() == Heightmap.Biome.Plains && BiomeConquerorUtils.isYagluthDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
             }
-            else if (Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
+            else if (player.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
             }

@@ -3,6 +3,7 @@ using BepInEx;
 using System;
 using System.Linq;
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace BiomeConqueror
 {
@@ -68,14 +69,21 @@ namespace BiomeConqueror
                 PlayerBuffs.RemoveAllBenefitBuffs();
                 PlayerBuffs.AddPlayerBiomeBenefitBuff();
 
-                var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
-                if (itemData == null) return;
-                Player.m_localPlayer.UnequipItem(itemData);
-                Player.m_localPlayer.EquipItem(itemData); // triggers MistlandsPatch
-            } else
+                _ = ReloadWispLight();
+            }
+            else
             {
                 PlayerBuffs.RemoveAllBenefitBuffs();
             }
+        }
+
+        private static async Task ReloadWispLight()
+        {
+            await Task.Delay((int)0.15 * 1000); // to miliseconds
+            var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
+            if (itemData == null) return;
+            Player.m_localPlayer.UnequipItem(itemData);
+            Player.m_localPlayer.EquipItem(itemData); // triggers MistlandsPatch
         }
     }
 }
