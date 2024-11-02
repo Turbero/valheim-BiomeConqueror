@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace BiomeConqueror
+namespace BiomeConqueror.Benefits
 {
     [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
     public class WeatherPatch

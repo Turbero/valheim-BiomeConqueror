@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using System.Reflection;
 
-namespace BiomeConqueror
+namespace BiomeConqueror.Benefits
 {
     [HarmonyPatch]
     public class PlainsPatch

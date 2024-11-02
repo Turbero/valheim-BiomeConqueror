@@ -6,9 +6,10 @@ Showcase link: https://www.youtube.com/watch?v=REf7-5lfv7w
 
 Biome Conqueror is a mod that will let you remove the biome debuff after you defeat the corresponding boss for that area. You can decide if the progression is applicable only by player or by server global progression.
 
-- After defeating Bonemass, you will no longer get wet with the swamp rain (you will in other biomes).
-- After defeating Moder, you will no longer get frozen in mountains when no wearing freezing protection effects.
-- After defeating The Queen, the wisp light belt will have the range increased long enough to see your surroundings.
+- After defeating Bonemass, you will no longer get wet with the swamp rain (you will in other biomes)
+- After defeating Moder, you will no longer get frozen in mountains when no wearing freezing protection effects
+- After defeating Yagluth, you will no longer be damaged by Deathsquitos
+- After defeating The Queen, the wisp light belt will have the range increased long enough to see your surroundings
 
 [ESP]
 
@@ -16,6 +17,7 @@ Biome Conqueror es un mod que te permitirá eliminar el debuff del bioma cuando 
 
 - Tras derrotar a Tuétano, ya no te mojarás con la lluvia del pantano (todavía lo hará la lluvia de otros biomas)
 - Tras derrotar a Moder, ya no te congelarás en las montañas cuando no lleves ropa protectora contra el frío
+- Tras derrotar a Yagluth, los Muersquitos ya no te harán daño
 - Tras derrotar a La Reina, el cinturón de Luz de Wisp tendrá el rango de despejar la niebla mucho más amplio para ver más tus alrededores
 
 # About myself

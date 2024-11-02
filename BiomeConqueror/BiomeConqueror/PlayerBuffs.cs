@@ -2,20 +2,12 @@
 using System;
 using UnityEngine;
 using HarmonyLib;
+using static BiomeConqueror.Constants;
 
 namespace BiomeConqueror
 {
     public class PlayerBuffs
     {
-        public static readonly string BONEMASS_DEFEATED_MESSAGE_KEY = "$event_boss03_end";
-        public static readonly string MODER_DEFEATED_MESSAGE_KEY    = "$event_boss04_end";
-        public static readonly string YAGLUTH_DEFEATED_MESSAGE_KEY  = "$event_boss05_end";
-        public static readonly string QUEEN_DEFEATED_MESSAGE_KEY    = "$enemy_boss_queen_deathmessage";
-        public static readonly string TROPHY_BONEMASS = "TrophyBonemass";
-        public static readonly string TROPHY_MODER    = "TrophyDragonQueen";
-        public static readonly string TROPHY_YAGLUTH  = "TrophyGoblinKing";
-        public static readonly string TROPHY_QUEEN    = "TrophySeekerQueen";
-
         private static Dictionary<string, Sprite> cachedSprites = new Dictionary<string, Sprite>();
 
         public static void AddBenefitBuff(Player player, string name, string spriteName)

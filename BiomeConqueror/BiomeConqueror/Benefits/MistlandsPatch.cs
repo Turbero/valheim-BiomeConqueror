@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace BiomeConqueror
+namespace BiomeConqueror.Benefits
 {
     [HarmonyPatch]
     public class MistlandsPatch

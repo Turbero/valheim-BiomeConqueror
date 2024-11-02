@@ -4,7 +4,7 @@
 
 * Added new benefit when Yagluth is defeated. After defeating it, you will no longer be attacked by deathsquitos.
 * Added option to show benefits as buffs in the player buffs when you enter the corresponding biome.
-* 
+* Added hot key to open compendium (F3 by default)
 
 ## 1.0.4
 

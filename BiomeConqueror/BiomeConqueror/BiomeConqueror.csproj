@@ -63,6 +63,14 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Libs\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Libs\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>..\..\..\..\Libs\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
@@ -83,17 +91,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AshlandsPatch.cs" />
+    <Compile Include="Benefits\AshlandsPatch.cs" />
     <Compile Include="BiomeConqueror.cs" />
     <Compile Include="BiomeConquerorUtils.cs" />
     <Compile Include="Compendium.cs" />
     <Compile Include="ConfigurationFile.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Benefits\EarnBenefit.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="MistlandsPatch.cs" />
-    <Compile Include="PlainsPatch.cs" />
+    <Compile Include="Benefits\MistlandsPatch.cs" />
+    <Compile Include="Benefits\PlainsPatch.cs" />
     <Compile Include="PlayerBuffs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeatherPatch.cs" />
+    <Compile Include="Benefits\WeatherPatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MODGEN\icon.png" />
