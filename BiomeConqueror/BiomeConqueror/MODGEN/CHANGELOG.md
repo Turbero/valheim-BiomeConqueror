@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.1.1
+
+* Small fix to apply queen benefit on wisp light inmediately after dying
+* Now you need to defeat the boss in his biome in order to earn the benefit
+
 ## 1.1.0
 
 * Added new benefit when Yagluth is defeated. After defeating it, you will no longer be attacked by deathsquitos.
