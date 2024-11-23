@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.1.2
+
+* ServerSync integration
+* Use worldProgression = true in config file to affect all players in a server if interested
+
 ## 1.1.1
 
 * Small fix to apply queen benefit on wisp light inmediately after dying
