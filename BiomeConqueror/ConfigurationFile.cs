@@ -27,8 +27,9 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
         public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
         public static ConfigEntry<bool> queenBenefitEligibleEnabled;
-        public static ConfigEntry<float> queenBenefitEligibleRange;
+        public static ConfigEntry<float> queenBenefitRange;
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
+        public static ConfigEntry<float> faderBenefitDamageFireResistant;
 
         private static ConfigFile configFile;
         private static string ConfigFileName = BiomeConqueror.GUID + ".cfg";
@@ -63,8 +64,9 @@ namespace BiomeConqueror
                 moderBenefitEligibleEnabled = config("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
                 yagluthBenefitEligibleEnabled = config("3 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
                 queenBenefitEligibleEnabled = config("3 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
-                queenBenefitEligibleRange = config("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
-                faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all ashlands after killing the Fader (default = true)");
+                queenBenefitRange = config("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
+                faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
+                faderBenefitDamageFireResistant = config("3 - Victories", "FaderBenefitDamageFireResistant", 100f, "Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)");
 
                 modEnabled.SettingChanged += Configuration_SettingChanged;
                 worldProgression.SettingChanged += Configuration_SettingChanged;
@@ -72,12 +74,14 @@ namespace BiomeConqueror
                 eikthyrBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 eikthyrBenefitExtraDrop.SettingChanged += Configuration_SettingChanged;
                 elderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                elderBenefitMultiplierTrollDmg.SettingChanged += Configuration_SettingChanged;
                 bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 yagluthBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                queenBenefitEligibleRange.SettingChanged += Configuration_SettingChanged;
+                queenBenefitRange.SettingChanged += Configuration_SettingChanged;
                 faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                faderBenefitDamageFireResistant.SettingChanged += Configuration_SettingChanged;
                 
                 SetupWatcher();
             }

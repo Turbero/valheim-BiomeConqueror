@@ -27,7 +27,7 @@ namespace BiomeConqueror.Benefits
                         .FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
 
                     if (!__instance.isActiveAndEnabled || itemData == null) return;
-                    __instance.m_forceField.endRange = ConfigurationFile.queenBenefitEligibleRange.Value;
+                    __instance.m_forceField.endRange = ConfigurationFile.queenBenefitRange.Value;
                 }
 
                 demisterRange = __instance.m_forceField.endRange;

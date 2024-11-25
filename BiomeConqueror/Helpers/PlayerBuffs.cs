@@ -97,11 +97,11 @@ namespace BiomeConqueror.Helpers
             }
             if (spriteName == TROPHY_QUEEN)
             {
-                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.";
+                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitRange.Value + "m.";
             }
             if (spriteName == TROPHY_FADER)
             {
-                return Localization.instance.Localize("$biome_ashlands") + " = TBD";
+                return Localization.instance.Localize("$biome_ashlands") + " / " + Localization.instance.Localize("$item_durability") + " " + Localization.instance.Localize("$inventory_fire") + " +" + ConfigurationFile.faderBenefitDamageFireResistant.Value + "%";
             }
             return "";
         }
@@ -150,7 +150,15 @@ namespace BiomeConqueror.Helpers
             Player player = Player.m_localPlayer;
             if (player == null) return;
 
-            if (player.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
+            if (player.GetCurrentBiome() == Heightmap.Biome.Meadows && BiomeConquerorUtils.isEikthyrDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, EIKTHYR_DEFEATED_MESSAGE_KEY, TROPHY_EIKTHYR);
+            }
+            else if (player.GetCurrentBiome() == Heightmap.Biome.BlackForest && BiomeConquerorUtils.isElderDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, ELDER_DEFEATED_MESSAGE_KEY, TROPHY_ELDER);
+            }
+            else if (player.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
@@ -165,6 +173,10 @@ namespace BiomeConqueror.Helpers
             else if (player.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
+            }
+            else if (player.GetCurrentBiome() == Heightmap.Biome.AshLands && BiomeConquerorUtils.isFaderDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
             }
         }
     }
