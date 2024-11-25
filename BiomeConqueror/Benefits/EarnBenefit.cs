@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System.Linq;
-using static BiomeConqueror.Constants;
+using BiomeConqueror.Helpers;
+using static BiomeConqueror.Helpers.Constants;
 
 namespace BiomeConqueror.Benefits
 {
@@ -16,7 +17,21 @@ namespace BiomeConqueror.Benefits
                 if (__instance != null && __instance.IsBoss())
                 {
                     Logger.Log($"defeated name: {__instance.m_name}");
-                    if (__instance.m_name == "$enemy_bonemass" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
+                    if (__instance.m_name == "$enemy_eikthyr" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Meadows)
+                    {
+                        Player.m_localPlayer.AddUniqueKey(EIKTHYR_DEFEATED_PLAYER_KEY);
+                        Logger.Log("** Eikthyr defeated");
+                        if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.eikthyrBenefitEligibleEnabled.Value)
+                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, EIKTHYR_DEFEATED_MESSAGE_KEY, TROPHY_EIKTHYR);
+                    }
+                    else if (__instance.m_name == "$enemy_gdking" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.BlackForest)
+                    {
+                        Player.m_localPlayer.AddUniqueKey(ELDER_DEFEATED_PLAYER_KEY);
+                        Logger.Log("** Elder defeated");
+                        if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.elderBenefitEligibleEnabled.Value)
+                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, ELDER_DEFEATED_MESSAGE_KEY, TROPHY_ELDER);
+                    }
+                    else if (__instance.m_name == "$enemy_bonemass" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
                     {
                         Player.m_localPlayer.AddUniqueKey(BONEMASS_DEFEATED_PLAYER_KEY);
                         Logger.Log($"** Bonemass defeated");
@@ -44,7 +59,7 @@ namespace BiomeConqueror.Benefits
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.queenBenefitEligibleEnabled.Value)
                         {
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
-
+                            //Refresh wisp light immediately
                             var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
                             if (itemData != null)
                             {
@@ -52,6 +67,12 @@ namespace BiomeConqueror.Benefits
                                 Player.m_localPlayer.EquipItem(itemData);
                             }
                         }
+                    }else if (__instance.m_name == "$enemy_fader" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.AshLands)
+                    {
+                        Player.m_localPlayer.AddUniqueKey(FADER_DEFEATED_PLAYER_KEY);
+                        Logger.Log($"** Fader defeated");
+                        if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.faderBenefitEligibleEnabled.Value)
+                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
                     }
                 }
             }

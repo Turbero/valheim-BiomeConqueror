@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Benefits\AshlandsPatch.cs" />
     <Compile Include="Benefits\EarnBenefit.cs" />
+    <Compile Include="Benefits\MeadowsPatch.cs" />
     <Compile Include="Benefits\MistlandsPatch.cs" />
     <Compile Include="Benefits\PlainsPatch.cs" />
     <Compile Include="Benefits\WeatherPatch.cs" />
@@ -112,9 +113,9 @@
     <Compile Include="BiomeConquerorUtils.cs" />
     <Compile Include="Compendium.cs" />
     <Compile Include="ConfigurationFile.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\PlayerBuffs.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="PlayerBuffs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,7 +126,6 @@
     <None Include="MODGEN\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Libs\ServerSync.dll" />
     <Content Include="MODGEN\icon.png" />

@@ -1,8 +1,11 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using BiomeConqueror.Helpers;
 using UnityEngine;
 
 namespace BiomeConqueror
@@ -12,7 +15,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.1.2";
+        public const string VERSION = "1.1.3";
         
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -112,10 +115,32 @@ namespace BiomeConqueror
         {
             if (biome != previousBiome)
             {
+                updateOldKeys();
                 Logger.Log($"Biome changed: {previousBiome} -> {biome}");
                 previousBiome = biome;
                 PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
             }
+        }
+
+        private static void updateOldKeys()
+        {
+            Player player = Player.m_localPlayer;
+            List<string> keys = player.GetUniqueKeys();
+            
+            List<string> keysToRemove = new List<string>();
+            List<string> keysToAdd = new List<string>();
+            foreach (var key in keys.Where(key => Constants.benefitDefeatedPlayerOldKeys.Contains(key)))
+            {
+                Logger.Log($"Old key detected. Refreshing {key} -> {key+"_BC"}");
+                
+                Logger.Log("key to remove: "+key);
+                keysToRemove.Add(key);
+                
+                Logger.Log("key to add: "+key+"_BC");
+                keysToAdd.Add(key + "_BC");
+            }
+            keysToRemove.ForEach(key => player.RemoveUniqueKey(key));
+            keysToAdd.ForEach(key => player.AddUniqueKey(key));
         }
     }
 }

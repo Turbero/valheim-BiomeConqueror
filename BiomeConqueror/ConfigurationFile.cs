@@ -1,9 +1,11 @@
 ﻿using BepInEx.Configuration;
 using BepInEx;
 using System;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using System.Threading.Tasks;
+using BiomeConqueror.Helpers;
 using ServerSync;
 
 namespace BiomeConqueror
@@ -17,13 +19,19 @@ namespace BiomeConqueror
         public static ConfigEntry<KeyCode> hotKey;
         public static ConfigEntry<bool> worldProgression;
         public static ConfigEntry<bool> benefitIcons;
+        public static ConfigEntry<bool> eikthyrBenefitEligibleEnabled;
+        public static ConfigEntry<int> eikthyrBenefitEligibleExtraDrop;
+        public static ConfigEntry<bool> elderBenefitEligibleEnabled;
         public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
         public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
         public static ConfigEntry<bool> queenBenefitEligibleEnabled;
         public static ConfigEntry<float> queenBenefitEligibleRange;
+        public static ConfigEntry<bool> faderBenefitEligibleEnabled;
 
         private static ConfigFile configFile;
+        private static string ConfigFileName = BiomeConqueror.GUID + ".cfg";
+        private static string ConfigFileFullPath = Paths.ConfigPath + Path.DirectorySeparatorChar + ConfigFileName;
 
         private static readonly ConfigSync ConfigSync = new ConfigSync(BiomeConqueror.GUID)
         {
@@ -46,20 +54,55 @@ namespace BiomeConqueror
                 worldProgression = config("2 - Config", "WorldProgression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
                 hotKey = config("2 - Config", "HotKey", KeyCode.F3, "Hot key to open the compendium (default = F3)", false);
                 benefitIcons = config("2 - Config", "BenefitIcons", true, "Enabling/Disabling the benefits as permanent buffs (default = false)", false);
+                eikthyrBenefitEligibleEnabled = config("3 - Victories", "EikthyrBenefitEligibleEnabled", true, "Allows to earn the benefit that double drops deer meat in all meadows after killing Eikthyr (default = true)");
+                eikthyrBenefitEligibleExtraDrop = config("3 - Victories", "EikthyrBenefitEligibleExtraDrop", 2, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = 2)");
+                elderBenefitEligibleEnabled = config("3 - Victories", "ElderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all black forests after killing the Elder (default = true)");
                 bonemassBenefitEligibleEnabled = config("3 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
                 moderBenefitEligibleEnabled = config("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
                 yagluthBenefitEligibleEnabled = config("3 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
                 queenBenefitEligibleEnabled = config("3 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitEligibleRange = config("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
+                faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all ashlands after killing the Fader (default = true)");
 
                 modEnabled.SettingChanged += Configuration_SettingChanged;
                 worldProgression.SettingChanged += Configuration_SettingChanged;
                 benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
+                eikthyrBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                eikthyrBenefitEligibleExtraDrop.SettingChanged += Configuration_SettingChanged;
+                elderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 yagluthBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleRange.SettingChanged += Configuration_SettingChanged;
+                faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
+                
+                SetupWatcher();
+            }
+        }
+        
+        private static void SetupWatcher()
+        {
+            FileSystemWatcher watcher = new FileSystemWatcher(Paths.ConfigPath, ConfigFileName);
+            watcher.Changed += ReadConfigValues;
+            watcher.Created += ReadConfigValues;
+            watcher.Renamed += ReadConfigValues;
+            watcher.IncludeSubdirectories = true;
+            watcher.SynchronizingObject = ThreadingHelper.SynchronizingObject;
+            watcher.EnableRaisingEvents = true;
+        }
+        
+        private static void ReadConfigValues(object sender, FileSystemEventArgs e)
+        {
+            if (!File.Exists(ConfigFileFullPath)) return;
+            try
+            {
+                Logger.Log("Attempting to reload configuration...");
+                configFile.Reload();
+            }
+            catch
+            {
+                Logger.LogError($"There was an issue loading {ConfigFileName}");
             }
         }
 

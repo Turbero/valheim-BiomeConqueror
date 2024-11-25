@@ -22,17 +22,32 @@ namespace BiomeConqueror
 
             string currentText = activeEffectsText.m_text;
 
+            var benefitEikthyr = BiomeConquerorUtils.isEikthyrDefeatedForPlayer();
+            var benefitElder = BiomeConquerorUtils.isElderDefeatedForPlayer();
             var benefitBonemass = BiomeConquerorUtils.isBonemassDefeatedForPlayer();
             var benefitModer = BiomeConquerorUtils.isModerDefeatedForPlayer();
             var benefitYagluth = BiomeConquerorUtils.isYagluthDefeatedForPlayer();
             var benefitQueen = BiomeConquerorUtils.isQueenDefeatedForPlayer();
+            var benefitFader = BiomeConquerorUtils.isFaderDefeatedForPlayer();
 
-            if (benefitBonemass || benefitModer || benefitQueen)
+            if (benefitEikthyr || benefitElder || benefitBonemass || benefitModer || benefitYagluth || benefitQueen || benefitFader)
             {
 
                 StringBuilder stringBuilder = new StringBuilder(256);
                 stringBuilder.Append("\n\n");
                 stringBuilder.Append("<color=yellow>BiomeConqueror Mod</color>\n");
+                if (benefitEikthyr)
+                {
+                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_eikthyr_name") + "</color>\n");
+                    stringBuilder.Append(Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deermeat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value);
+                    stringBuilder.Append("\n");
+                }
+                if (benefitElder)
+                {
+                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_theelder_name") + "</color>\n");
+                    stringBuilder.Append(Localization.instance.Localize("$biome_blackforest") + " / " + Localization.instance.Localize("$enemy_troll") + " +" + Localization.instance.Localize("$inventory_damage"));
+                    stringBuilder.Append("\n");
+                }
                 if (benefitBonemass)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_bonemass_name") + "</color>\n");
@@ -55,6 +70,12 @@ namespace BiomeConqueror
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_queen_name") + "</color>\n");
                     stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.");
+                    stringBuilder.Append("\n");
+                }
+                if (benefitFader)
+                {
+                    stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_fader_name") + "</color>\n");
+                    stringBuilder.Append("TBD"); //TODO
                     stringBuilder.Append("\n");
                 }
 

@@ -2,9 +2,9 @@
 using System;
 using UnityEngine;
 using HarmonyLib;
-using static BiomeConqueror.Constants;
+using static BiomeConqueror.Helpers.Constants;
 
-namespace BiomeConqueror
+namespace BiomeConqueror.Helpers
 {
     public class PlayerBuffs
     {
@@ -33,14 +33,7 @@ namespace BiomeConqueror
 
         public static void RemoveAllBenefitBuffs()
         {
-            List<string> benefitBuffsDef = new List<string> {
-                BONEMASS_DEFEATED_MESSAGE_KEY,
-                MODER_DEFEATED_MESSAGE_KEY,
-                YAGLUTH_DEFEATED_MESSAGE_KEY,
-                QUEEN_DEFEATED_MESSAGE_KEY
-             };
-
-            foreach (var def in benefitBuffsDef)
+            foreach (var def in benefitDefeatedMessageKeys)
             {
                 Player player = Player.m_localPlayer;
                 SEMan seMan = player.GetSEMan();
@@ -82,20 +75,33 @@ namespace BiomeConqueror
 
         private static string getBenefitTooltipBySpriteName(string spriteName)
         {
+            if (spriteName == TROPHY_EIKTHYR)
+            {
+                return Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deermeat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value;
+            }
+            if (spriteName == TROPHY_ELDER)
+            {
+                return Localization.instance.Localize("$biome_blackforest") + " / " + Localization.instance.Localize("$enemy_troll") + " +" + Localization.instance.Localize("$inventory_damage");
+            }
             if (spriteName == TROPHY_BONEMASS)
             {
                 return Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none");
-            }else if (spriteName == TROPHY_MODER)
+            }
+            if (spriteName == TROPHY_MODER)
             {
                 return Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none");
             }
-            else if (spriteName == TROPHY_YAGLUTH)
+            if (spriteName == TROPHY_YAGLUTH)
             {
                 return Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none");
             }
-            else if (spriteName == TROPHY_QUEEN)
+            if (spriteName == TROPHY_QUEEN)
             {
                 return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitEligibleRange.Value + "m.";
+            }
+            if (spriteName == TROPHY_FADER)
+            {
+                return Localization.instance.Localize("$biome_ashlands") + " = TBD";
             }
             return "";
         }
@@ -105,7 +111,15 @@ namespace BiomeConqueror
             Player player = Player.m_localPlayer;
             if (player == null) return;
 
-            if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
+            if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Meadows && BiomeConquerorUtils.isEikthyrDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, EIKTHYR_DEFEATED_MESSAGE_KEY, TROPHY_EIKTHYR);
+            }
+            else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.BlackForest && BiomeConquerorUtils.isElderDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, ELDER_DEFEATED_MESSAGE_KEY, TROPHY_ELDER);
+            }
+            else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Swamp && BiomeConquerorUtils.isBonemassDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
             }
@@ -120,6 +134,10 @@ namespace BiomeConqueror
             else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.Mistlands && BiomeConquerorUtils.isQueenDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
+            }
+            else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.AshLands && BiomeConquerorUtils.isFaderDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
             }
             else
             {

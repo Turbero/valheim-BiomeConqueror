@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.1.3
+
+* Added new benefit when defeating Eikthyr: deers in meadows drop extra deer meat (configurable, default by 1)
+* Updated player key names automatically to avoid conflict with other mods
+
 ## 1.1.2
 
 * ServerSync integration
