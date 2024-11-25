@@ -77,7 +77,7 @@ namespace BiomeConqueror.Helpers
         {
             if (spriteName == TROPHY_EIKTHYR)
             {
-                return Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deermeat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value;
+                return Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deermeat") + " +" + ConfigurationFile.eikthyrBenefitExtraDrop.Value;
             }
             if (spriteName == TROPHY_ELDER)
             {

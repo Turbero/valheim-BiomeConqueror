@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benefits\AshlandsPatch.cs" />
+    <Compile Include="Benefits\BlackForestPatch.cs" />
     <Compile Include="Benefits\EarnBenefit.cs" />
     <Compile Include="Benefits\MeadowsPatch.cs" />
     <Compile Include="Benefits\MistlandsPatch.cs" />

@@ -20,8 +20,9 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> worldProgression;
         public static ConfigEntry<bool> benefitIcons;
         public static ConfigEntry<bool> eikthyrBenefitEligibleEnabled;
-        public static ConfigEntry<int> eikthyrBenefitEligibleExtraDrop;
+        public static ConfigEntry<int> eikthyrBenefitExtraDrop;
         public static ConfigEntry<bool> elderBenefitEligibleEnabled;
+        public static ConfigEntry<float> elderBenefitMultiplierTrollDmg;
         public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
         public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
@@ -55,8 +56,9 @@ namespace BiomeConqueror
                 hotKey = config("2 - Config", "HotKey", KeyCode.F3, "Hot key to open the compendium (default = F3)", false);
                 benefitIcons = config("2 - Config", "BenefitIcons", true, "Enabling/Disabling the benefits as permanent buffs (default = false)", false);
                 eikthyrBenefitEligibleEnabled = config("3 - Victories", "EikthyrBenefitEligibleEnabled", true, "Allows to earn the benefit that double drops deer meat in all meadows after killing Eikthyr (default = true)");
-                eikthyrBenefitEligibleExtraDrop = config("3 - Victories", "EikthyrBenefitEligibleExtraDrop", 2, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = 2)");
+                eikthyrBenefitExtraDrop = config("3 - Victories", "EikthyrBenefitExtraDrop", 2, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = 2)");
                 elderBenefitEligibleEnabled = config("3 - Victories", "ElderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all black forests after killing the Elder (default = true)");
+                elderBenefitMultiplierTrollDmg = config("3 - Victories", "ElderBenefitMultiplierTrollDmg", 1.5f, "Sets up the multiplier damage applied to trolls in black forests after killing the Elder (default = 1.5)");
                 bonemassBenefitEligibleEnabled = config("3 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
                 moderBenefitEligibleEnabled = config("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
                 yagluthBenefitEligibleEnabled = config("3 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
@@ -68,7 +70,7 @@ namespace BiomeConqueror
                 worldProgression.SettingChanged += Configuration_SettingChanged;
                 benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
                 eikthyrBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                eikthyrBenefitEligibleExtraDrop.SettingChanged += Configuration_SettingChanged;
+                eikthyrBenefitExtraDrop.SettingChanged += Configuration_SettingChanged;
                 elderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;

@@ -7,6 +7,7 @@ using static TextsDialog;
 namespace BiomeConqueror
 {
     [HarmonyPatch]
+    [HarmonyPriority(Priority.VeryLow)]
     public class CompendiumPatch
     {
         static MethodBase TargetMethod()
@@ -39,31 +40,41 @@ namespace BiomeConqueror
                 if (benefitEikthyr)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_eikthyr_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deer_meat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value);
+                    stringBuilder.Append(Localization.instance.Localize("$biome_meadows") + " / " + 
+                                         Localization.instance.Localize("$enemy_deer") + " = " + 
+                                         Localization.instance.Localize("$item_deer_meat") + " +" + ConfigurationFile.eikthyrBenefitExtraDrop.Value);
                     stringBuilder.Append("\n");
                 }
                 if (benefitElder)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_theelder_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_blackforest") + " / " + Localization.instance.Localize("$enemy_troll") + " +" + Localization.instance.Localize("$inventory_damage"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_blackforest") + " / " + 
+                                         Localization.instance.Localize("$enemy_troll") + " +" + 
+                                         Localization.instance.Localize("$inventory_damage"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitBonemass)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_bonemass_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_swamp") + " / " + Localization.instance.Localize("$se_wet_name") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_swamp") + " / " + 
+                                         Localization.instance.Localize("$se_wet_name") + " = " + 
+                                         Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitModer)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_moder_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_mountain") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_mountain") + " / " + 
+                                         Localization.instance.Localize("$se_freezing_name") + " = " + 
+                                         Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitYagluth)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_yagluth_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_plains") + " / " + Localization.instance.Localize("$enemy_deathsquito") + " = " + Localization.instance.Localize("$menu_none"));
+                    stringBuilder.Append(Localization.instance.Localize("$biome_plains") + " / " + 
+                                         Localization.instance.Localize("$enemy_deathsquito") + " = " + 
+                                         Localization.instance.Localize("$menu_none"));
                     stringBuilder.Append("\n");
                 }
                 if (benefitQueen)

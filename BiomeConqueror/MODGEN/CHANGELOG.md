@@ -1,9 +1,10 @@
 ### CHANGELOG
 
-## 1.1.3
+## 1.2.0
 
 * Added new benefit when defeating Eikthyr: deers in meadows drop extra deer meat (configurable, default by 1)
-* Updated player key names automatically to avoid conflict with other mods
+* Added new benefit when defeating the Elder: trolls receive more damage in black forests (configurable, default by x1.5)
+* Updated player key names automatically to avoid conflict with other mods (player doesn't have to do anything about, it will apply automatically)
 
 ## 1.1.2
 

@@ -30,7 +30,7 @@ namespace BiomeConqueror.Benefits
                     if (itemDrop != null)
                     {
                         itemDrop.m_itemData.m_stack =
-                            ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value; // Quantity to drop
+                            ConfigurationFile.eikthyrBenefitExtraDrop.Value; // Quantity to drop
                         Logger.Log("Ítem DeerMeat successfully generated.");
                     }
                     else
