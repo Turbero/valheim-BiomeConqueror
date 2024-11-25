@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.2.1
+
+* Added new benefit when defeated Fader: extra damage resistant to fire in percentage (configurable, default = 100)
+
 ## 1.2.0
 
 * Added new benefit when defeating Eikthyr: deers in meadows drop extra deer meat (configurable, default by 1)
