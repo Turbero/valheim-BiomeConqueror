@@ -39,7 +39,7 @@ namespace BiomeConqueror
                 if (benefitEikthyr)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_eikthyr_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deermeat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value);
+                    stringBuilder.Append(Localization.instance.Localize("$biome_meadows") + " / " + Localization.instance.Localize("$item_deer_meat") + " +" + ConfigurationFile.eikthyrBenefitEligibleExtraDrop.Value);
                     stringBuilder.Append("\n");
                 }
                 if (benefitElder)
