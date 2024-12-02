@@ -49,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libs\BepInEx.dll</HintPath>
     </Reference>
+    <Reference Include="gui_framework">
+      <HintPath>..\..\..\Libs\gui_framework.dll</HintPath>
+    </Reference>
     <Reference Include="ServerSync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libs\External\ServerSync.dll</HintPath>
@@ -61,6 +64,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\..\Libs\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libs\UnityEngine.dll</HintPath>
@@ -112,6 +118,7 @@
     <Compile Include="Benefits\WeatherPatch.cs" />
     <Compile Include="BiomeConqueror.cs" />
     <Compile Include="BiomeConquerorUtils.cs" />
+    <Compile Include="ChatCommand.cs" />
     <Compile Include="Compendium.cs" />
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="Helpers\Constants.cs" />

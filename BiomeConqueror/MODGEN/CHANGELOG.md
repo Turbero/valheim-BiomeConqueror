@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.2.2
+
+* Added command "/update-old-keys" to refresh old keys in games played before version 1.2.1. Type in chat to recover your benefits.
+* Small bug fix when reloading the game from title screen
+
 ## 1.2.1
 
 * Added new benefit when defeated Fader: extra damage resistant to fire in percentage (configurable, default = 100)
