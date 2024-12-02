@@ -27,6 +27,8 @@ Biome Conqueror es un mod que te permitirá eliminar el debuff del bioma cuando 
 
 DISCORD: Turbero (Turbero#3465)
 
+My Mods: https://thunderstore.io/c/valheim/p/turbero/
+
 STEAM: https://steamcommunity.com/id/turbero
 
 For any concerns or doubts, find me in the Hijos de Freyja Team Discord or in my own channel (click on icons):
