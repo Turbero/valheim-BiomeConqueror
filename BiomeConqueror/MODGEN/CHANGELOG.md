@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.2.3
+
+* Fixed demister range value in the player buff text
+* Recompiled with latest game version libraries
+
 ## 1.2.2
 
 * Added command "/update-old-keys" to refresh old keys in games played before version 1.2.1. Type in chat to recover your benefits.
@@ -22,7 +27,7 @@
 
 ## 1.1.1
 
-* Small fix to apply queen benefit on wisp light inmediately after dying
+* Small fix to apply queen benefit on wisp light immediately after dying
 * Now you need to defeat the boss in his biome in order to earn the benefit
 
 ## 1.1.0
@@ -45,7 +50,7 @@
 
 ## 1.0.1
 
-* Wisp Light range updated inmediately after defeating the queen or updating the config file range parameter without unequipping/equipping
+* Wisp Light range updated immediately after defeating the queen or updating the config file range parameter without unequipping/equipping
 * Adding world progression option instead of player own battles
 
 ## 1.0.0
