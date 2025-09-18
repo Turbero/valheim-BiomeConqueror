@@ -23,11 +23,13 @@ namespace BiomeConqueror
         public static ConfigEntry<int> eikthyrBenefitExtraDrop;
         public static ConfigEntry<bool> elderBenefitEligibleEnabled;
         public static ConfigEntry<float> elderBenefitMultiplierTrollDmg;
+        public static ConfigEntry<float> elderBenefitMultiplierBearDmg;
         public static ConfigEntry<bool> bonemassBenefitEligibleEnabled;
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
         public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
         public static ConfigEntry<bool> queenBenefitEligibleEnabled;
         public static ConfigEntry<float> queenBenefitRange;
+        public static ConfigEntry<float> queenBenefitBaseRange;
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
         public static ConfigEntry<float> faderBenefitDamageFireResistant;
 
@@ -59,12 +61,14 @@ namespace BiomeConqueror
                 eikthyrBenefitEligibleEnabled = config("3 - Victories", "EikthyrBenefitEligibleEnabled", true, "Allows to earn the benefit that double drops deer meat in all meadows after killing Eikthyr (default = true)");
                 eikthyrBenefitExtraDrop = config("3 - Victories", "EikthyrBenefitExtraDrop", 2, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = 2)");
                 elderBenefitEligibleEnabled = config("3 - Victories", "ElderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all black forests after killing the Elder (default = true)");
-                elderBenefitMultiplierTrollDmg = config("3 - Victories", "ElderBenefitMultiplierTrollDmg", 1.5f, "Sets up the multiplier damage applied to trolls in black forests after killing the Elder (default = 1.5)");
+                elderBenefitMultiplierTrollDmg = config("3 - Victories", "ElderBenefitMultiplierTrollDmg", 2.0f, "Sets up the multiplier damage applied to trolls in black forests after killing the Elder (default = 1.5)");
+                elderBenefitMultiplierBearDmg = config("3 - Victories", "ElderBenefitMultiplierBearDmg", 2.0f, "Sets up the multiplier damage applied to bears in black forests after killing the Elder (default = 1.5)");
                 bonemassBenefitEligibleEnabled = config("3 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
                 moderBenefitEligibleEnabled = config("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
                 yagluthBenefitEligibleEnabled = config("3 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
                 queenBenefitEligibleEnabled = config("3 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
                 queenBenefitRange = config("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
+                queenBenefitBaseRange = config("3 - Victories", "queenBenefitBaseRange", 10f, "Establishes the base wisp light range before killing The Seeker Queen (default = 10)");
                 faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
                 faderBenefitDamageFireResistant = config("3 - Victories", "FaderBenefitDamageFireResistant", 100f, "Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)");
 
@@ -75,11 +79,13 @@ namespace BiomeConqueror
                 eikthyrBenefitExtraDrop.SettingChanged += Configuration_SettingChanged;
                 elderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 elderBenefitMultiplierTrollDmg.SettingChanged += Configuration_SettingChanged;
+                elderBenefitMultiplierBearDmg.SettingChanged += Configuration_SettingChanged;
                 bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 yagluthBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 queenBenefitRange.SettingChanged += Configuration_SettingChanged;
+                queenBenefitBaseRange.SettingChanged += Configuration_SettingChanged;
                 faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 faderBenefitDamageFireResistant.SettingChanged += Configuration_SettingChanged;
                 
@@ -103,8 +109,9 @@ namespace BiomeConqueror
             if (!File.Exists(ConfigFileFullPath)) return;
             try
             {
-                Logger.Log("Attempting to reload configuration...");
+                Logger.LogInfo("Attempting to reload configuration...");
                 configFile.Reload();
+                Logger.LogInfo("Reloaded configuration...");
             }
             catch
             {
