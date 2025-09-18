@@ -10,15 +10,27 @@ namespace BiomeConqueror.Benefits
             static void Prefix(ref HitData hit, Character __instance)
             {
                 Logger.Log("RPC_Damage name: " + __instance.name);
-                if (__instance.name.Contains("Troll"))
+                if (BiomeConquerorUtils.isElderDefeatedForPlayer() &&
+                    Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.BlackForest)
                 {
-                    if (BiomeConquerorUtils.isElderDefeatedForPlayer() &&
-                        Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.BlackForest)
+                    if (__instance.name.Contains("Troll"))
                     {
-                        if (ConfigurationFile.elderBenefitMultiplierTrollDmg.Value >= 1f)
                         {
-                            Logger.Log("Increasing damage hit to attacked trol by x"+ ConfigurationFile.elderBenefitMultiplierTrollDmg.Value);
-                            hit.m_damage.Modify(ConfigurationFile.elderBenefitMultiplierTrollDmg.Value);
+                            if (ConfigurationFile.elderBenefitMultiplierTrollDmg.Value >= 1f)
+                            {
+                                Logger.Log("Increasing damage hit to attacked troll by x" +
+                                           ConfigurationFile.elderBenefitMultiplierTrollDmg.Value);
+                                hit.m_damage.Modify(ConfigurationFile.elderBenefitMultiplierTrollDmg.Value);
+                            }
+                        }
+                    }
+                    else if (__instance.name.Contains("Bjorn"))
+                    {
+                        if (ConfigurationFile.elderBenefitMultiplierBearDmg.Value >= 1f)
+                        {
+                            Logger.Log("Increasing damage hit to attacked bear by x" +
+                                       ConfigurationFile.elderBenefitMultiplierBearDmg.Value);
+                            hit.m_damage.Modify(ConfigurationFile.elderBenefitMultiplierBearDmg.Value);
                         }
                     }
                 }
