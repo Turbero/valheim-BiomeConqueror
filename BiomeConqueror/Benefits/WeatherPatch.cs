@@ -5,12 +5,21 @@ namespace BiomeConqueror.Benefits
     [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
     public class WeatherPatch
     {
-        static void Prefix(EnvMan __instance)
+        static bool Prefix(EnvMan __instance)
         {
             Player player = Player.m_localPlayer;
 
             if (player != null)
             {
+                //Update wisplight if equipped
+                var demisters = Demister.GetDemisters();
+                if (demisters != null)
+                {
+                    foreach (var demister in demisters)
+                        MistlandsPatch.updateDemisterRangeAndText(demister); //is this all active demisters of all players in the game???
+                }
+
+
                 if (player.GetCurrentBiome() == Heightmap.Biome.Swamp)
                 {
                     if (BiomeConquerorUtils.isBonemassDefeatedForPlayer())
@@ -40,6 +49,8 @@ namespace BiomeConqueror.Benefits
                     }
                 }
             }
+
+            return true;
         }
     }
 }
