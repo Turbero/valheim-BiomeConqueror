@@ -1,5 +1,15 @@
 ### CHANGELOG
 
+## 1.3.0
+
+* Now after defeating The Elder, also the damage that the new bears receive is increased
+* Damage to trolls and bears in black forest after defeating The Elder increased to double damage by default in configuration
+* Fixed wisp light distance when not in Mistlands after killing the Queen (the distance should not be extended)
+* Fixed wet message after defeating Bonemass in the swamp, the game was spamming it on top left corner on and off even after exiting the biome
+* Small fix in the version number (1.2.3 still showed as 1.2.2, but now it will show 1.2.4, sorry!)
+* Code refactor to unify bosses information
+* Tip: Better to delete config file and regenerate
+
 ## 1.2.3
 
 * Fixed demister range value in the player buff text
@@ -16,7 +26,7 @@
 
 ## 1.2.0
 
-* Added new benefit when defeating Eikthyr: deers in meadows drop extra deer meat (configurable, default by 1)
+* Added new benefit when defeating Eikthyr: deer in meadows drop extra deer meat (configurable, default by 1)
 * Added new benefit when defeating the Elder: trolls receive more damage in black forests (configurable, default by x1.5)
 * Updated player key names automatically to avoid conflict with other mods (player doesn't have to do anything about, it will apply automatically)
 
@@ -50,13 +60,13 @@
 
 ## 1.0.1
 
-* Wisp Light range updated immediately after defeating the queen or updating the config file range parameter without unequipping/equipping
+* Wisp Light range updated immediately after defeating the queen or updating the config file range parameter without having to equip/remove
 * Adding world progression option instead of player own battles
 
 ## 1.0.0
 
 Initial version:
 
-* After defeating Bonemass, you will no longer get wet with the swamp rain (you will in other biomes).
+* After defeating Bonemass, you will no longer get wet with the swamp rain (you will get in other biomes though).
 * After defeating Moder, you will no longer get frozen in mountains when no wearing freezing protection effects.
 * After defeating The Queen, the wisp light belt will have the range increased long enough to see your surroundings.

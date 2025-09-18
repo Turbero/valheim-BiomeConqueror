@@ -34,12 +34,12 @@ namespace BiomeConqueror
             List<string> keysToAdd = new List<string>();
             foreach (var key in keys.Where(key => Constants.benefitDefeatedPlayerOldKeys.Contains(key)))
             {
-                Logger.Log($"Old key detected. Refreshing {key} -> {key + "_BC"}");
+                Logger.LogInfo($"Old key detected. Refreshing {key} -> {key + "_BC"}");
 
-                Logger.Log("key to remove: " + key);
+                Logger.LogInfo("key to remove: " + key);
                 keysToRemove.Add(key);
 
-                Logger.Log("key to add: " + key + "_BC");
+                Logger.LogInfo("key to add: " + key + "_BC");
                 keysToAdd.Add(key + "_BC");
             }
 

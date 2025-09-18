@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.2.2";
+        public const string VERSION = "1.3.0";
         
         private readonly Harmony harmony = new Harmony(GUID);
 
