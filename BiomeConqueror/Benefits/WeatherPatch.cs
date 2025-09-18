@@ -27,7 +27,7 @@ namespace BiomeConqueror.Benefits
                         __instance.GetCurrentEnvironment().m_isWet = false;
                         if (Player.m_localPlayer.GetSEMan().HaveStatusEffect("Wet".GetHashCode()))
                         {
-                            Player.m_localPlayer.GetSEMan().RemoveStatusEffect("Wet".GetHashCode());
+                            Player.m_localPlayer.GetSEMan().RemoveStatusEffect("Wet".GetHashCode(), true);
                         }
                     }
                     else
