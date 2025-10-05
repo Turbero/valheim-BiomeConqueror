@@ -115,6 +115,7 @@
     <Compile Include="Benefits\MeadowsPatch.cs" />
     <Compile Include="Benefits\MistlandsPatch.cs" />
     <Compile Include="Benefits\PlainsPatch.cs" />
+    <Compile Include="Benefits\ReduceBossCooldownPatch.cs" />
     <Compile Include="Benefits\WeatherPatch.cs" />
     <Compile Include="BiomeConqueror.cs" />
     <Compile Include="BiomeConquerorUtils.cs" />

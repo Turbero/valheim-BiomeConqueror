@@ -32,6 +32,9 @@ namespace BiomeConqueror
         public static ConfigEntry<float> queenBenefitBaseRange;
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
         public static ConfigEntry<float> faderBenefitDamageFireResistant;
+        public static ConfigEntry<int> bossPowerReduction;
+        public static ConfigEntry<string> enemiesForReduction;
+        public static ConfigEntry<string> reductionMessageSuccess;
 
         private static ConfigFile configFile;
         private static string ConfigFileName = BiomeConqueror.GUID + ".cfg";
@@ -71,7 +74,10 @@ namespace BiomeConqueror
                 queenBenefitBaseRange = config("3 - Victories", "queenBenefitBaseRange", 10f, "Establishes the base wisp light range before killing The Seeker Queen (default = 10)");
                 faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
                 faderBenefitDamageFireResistant = config("3 - Victories", "FaderBenefitDamageFireResistant", 100f, "Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)");
-
+                bossPowerReduction = config("4 - Cooldown power", "BossPowerCooldownReduction", 60, "Number of seconds to reduce the power cooldown when one of the specified monsters is defeated (default = 60)");
+                enemiesForReduction = config("4 - Cooldown power", "EnemiesForReduction", "Troll,Bjorn", "Comma-separated list of enemies to apply power cooldown reduction when defeated (default = Troll,Bjorn)");
+                reductionMessageSuccess = config("4 - Cooldown power", "ReductionMessageSuccess", "Cooldown reduced by {0} seconds", "Message on the top left corner when killed one of the specified monsters to reduce boss power cooldown");
+                
                 modEnabled.SettingChanged += Configuration_SettingChanged;
                 worldProgression.SettingChanged += Configuration_SettingChanged;
                 benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
@@ -88,6 +94,8 @@ namespace BiomeConqueror
                 queenBenefitBaseRange.SettingChanged += Configuration_SettingChanged;
                 faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 faderBenefitDamageFireResistant.SettingChanged += Configuration_SettingChanged;
+                bossPowerReduction.SettingChanged += Configuration_SettingChanged;
+                enemiesForReduction.SettingChanged += Configuration_SettingChanged;
                 
                 SetupWatcher();
             }
