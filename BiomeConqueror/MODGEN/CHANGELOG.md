@@ -1,14 +1,19 @@
 ### CHANGELOG
 
+## 1.3.1
+
+* Added new feature to reduce the cooldown on powers by killing top fighters in each biome.
+  * Decrease amount configurable in config file. Set to 0 to disable (default = 60).
+  * List of monsters configurable. Most powerful monsters assigned of each biome by default.
+
 ## 1.3.0
 
 * Now after defeating The Elder, also the damage that the new bears receive is increased
 * Damage to trolls and bears in black forest after defeating The Elder increased to double damage by default in configuration
 * Fixed wisp light distance when not in Mistlands after killing the Queen (the distance should not be extended)
 * Fixed wet message after defeating Bonemass in the swamp, the game was spamming it on top left corner on and off even after exiting the biome
-* Small fix in the version number (1.2.3 still showed as 1.2.2, but now it will show 1.2.4, sorry!)
+* Small fix in the version number (1.2.3 still showed as 1.2.2, but now it will show the right number, sorry!)
 * Code refactor to unify bosses information
-* Tip: Better to delete config file and regenerate
 
 ## 1.2.3
 

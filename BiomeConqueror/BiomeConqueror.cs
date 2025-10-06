@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.3.0";
+        public const string VERSION = "1.3.1";
         
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -32,13 +32,13 @@ namespace BiomeConqueror
         {
             if (!Player.m_localPlayer || !InventoryGui.instance) return;
 
-            // Check if certain keys are hit to close Almanac GUI
+            // Check if certain keys are hit to close GUI
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab) || Player.m_localPlayer.IsDead())
             {
                 InventoryGui.instance.m_textsDialog.gameObject.SetActive(false);
             }
 
-            // Hotkey to open/close skills dialog (if game is not paused)
+            // Hotkey to open/close texts dialog (if game is not paused)
             if (Input.GetKeyDown(ConfigurationFile.hotKey.Value) && Time.timeScale > 0)
             {
                 if (InventoryGui.instance.m_textsDialog.gameObject.activeSelf)
@@ -55,7 +55,7 @@ namespace BiomeConqueror
         }
         private static async Task WaitForSecondsAsync(float seconds)
         {
-            await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milisegundos
+            await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milliseconds
             InventoryGui.instance.m_textsDialog.Setup(Player.m_localPlayer);
             InventoryGui.instance.m_textsDialog.gameObject.SetActive(true);
         }
