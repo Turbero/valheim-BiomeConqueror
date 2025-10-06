@@ -33,6 +33,7 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
         public static ConfigEntry<float> faderBenefitDamageFireResistant;
         public static ConfigEntry<int> bossPowerReduction;
+        public static ConfigEntry<bool> bossPowerReductionBumpedByStars;
         public static ConfigEntry<string> enemiesForReduction;
         public static ConfigEntry<string> reductionMessageSuccess;
 
@@ -52,8 +53,7 @@ namespace BiomeConqueror
             {
                 configFile = plugin.Config;
 
-                _serverConfigLocked = config("1 - General", "Lock Configuration", true,
-                "If on, the configuration is locked and can be changed by server admins only.");
+                _serverConfigLocked = config("1 - General", "Lock Configuration", true, "If on, the configuration is locked and can be changed by server admins only.");
                 _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
                 modEnabled = config("1 - General", "Enabled", true, "Enabling/Disabling the mod (default = true)");
@@ -75,7 +75,8 @@ namespace BiomeConqueror
                 faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
                 faderBenefitDamageFireResistant = config("3 - Victories", "FaderBenefitDamageFireResistant", 100f, "Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)");
                 bossPowerReduction = config("4 - Cooldown power", "BossPowerCooldownReduction", 60, "Number of seconds to reduce the power cooldown when one of the specified monsters is defeated (default = 60)");
-                enemiesForReduction = config("4 - Cooldown power", "EnemiesForReduction", "Troll,Bjorn", "Comma-separated list of enemies to apply power cooldown reduction when defeated (default = Troll,Bjorn)");
+                bossPowerReductionBumpedByStars = config("4 - Cooldown power", "BossPowerReductionBumpedByStars", true, "Choose if high-level monsters must decrease more time to the power cooldown proportional to their number of starts (default = true)");
+                enemiesForReduction = config("4 - Cooldown power", "EnemiesForReduction", "Troll,Bjorn,Serpent,Abomination,StoneGolem,Unbjorn,Gjall,BonemawSerpent", "Comma-separated list of enemies to apply power cooldown reduction when defeated (leave blank to deactivate)");
                 reductionMessageSuccess = config("4 - Cooldown power", "ReductionMessageSuccess", "Cooldown reduced by {0} seconds", "Message on the top left corner when killed one of the specified monsters to reduce boss power cooldown");
                 
                 modEnabled.SettingChanged += Configuration_SettingChanged;
@@ -95,7 +96,9 @@ namespace BiomeConqueror
                 faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
                 faderBenefitDamageFireResistant.SettingChanged += Configuration_SettingChanged;
                 bossPowerReduction.SettingChanged += Configuration_SettingChanged;
+                bossPowerReductionBumpedByStars.SettingChanged += Configuration_SettingChanged;
                 enemiesForReduction.SettingChanged += Configuration_SettingChanged;
+                reductionMessageSuccess.SettingChanged += Configuration_SettingChanged;
                 
                 SetupWatcher();
             }
@@ -157,7 +160,7 @@ namespace BiomeConqueror
 
         private static async Task ReloadWispLight()
         {
-            await Task.Delay((int)0.15 * 1000); // to miliseconds
+            await Task.Delay((int)0.15 * 1000); // to milliseconds
             var itemData = Player.m_localPlayer.GetInventory().GetEquippedItems().FirstOrDefault(i => i.m_dropPrefab.name == "Demister");
             if (itemData == null) return;
             Player.m_localPlayer.UnequipItem(itemData);

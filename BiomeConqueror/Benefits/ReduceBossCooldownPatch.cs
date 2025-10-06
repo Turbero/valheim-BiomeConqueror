@@ -12,10 +12,8 @@ namespace BiomeConqueror.Benefits
         {
             int baseReduction = ConfigurationFile.bossPowerReduction.Value;
             if (baseReduction <= 0) return;
-            
-            //TODO Multiply for enemy-stars+1
-            
-            // Only enemies
+
+            // Only enemies, not PvP
             if (__instance is Player) return;
 
             
@@ -32,8 +30,14 @@ namespace BiomeConqueror.Benefits
                 
                 Player lastPlayer = killer as Player;
                 float m_guardianPowerCooldown = lastPlayer.m_guardianPowerCooldown;
-                if (m_guardianPowerCooldown > 0f)
+                if (m_guardianPowerCooldown > 0)
                 {
+                    if (ConfigurationFile.bossPowerReductionBumpedByStars.Value)
+                    {
+                        //GetLevel() starts with 1
+                        baseReduction *= __instance.GetLevel();
+                    }
+                    
                     lastPlayer.m_guardianPowerCooldown = Math.Max(0, lastPlayer.m_guardianPowerCooldown - baseReduction);
 
                     // Visual feedback
