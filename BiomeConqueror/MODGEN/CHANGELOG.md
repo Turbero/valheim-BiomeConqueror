@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.3.3
+
+* Fixed important issue that was not removing the freezing status after exiting mountain before having killed Moder. Sorry again!
+
 ## 1.3.2
 
 * Fixed important issue that was not removing the wet status after exiting swamp before having killed Bonemass. Sorry!

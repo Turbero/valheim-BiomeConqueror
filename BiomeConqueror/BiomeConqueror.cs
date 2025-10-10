@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.3.2";
+        public const string VERSION = "1.3.3";
         
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -120,6 +120,10 @@ namespace BiomeConqueror
                 {
                     Logger.Log("Coming from swamp, forcing wet false");
                     EnvMan.instance.GetCurrentEnvironment().m_isWet = false;
+                } else if (previousBiome == Heightmap.Biome.Mountain)
+                {
+                    Logger.Log("Coming from mountain, forcing freezing false");
+                    EnvMan.instance.GetCurrentEnvironment().m_isFreezing = false;
                 }
                 
                 previousBiome = biome;
