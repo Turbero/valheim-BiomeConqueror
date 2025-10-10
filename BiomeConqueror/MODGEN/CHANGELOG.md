@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.3.2
+
+* Fixed important issue that was not removing the wet status after exiting swamp before having killed Bonemass. Sorry!
+
 ## 1.3.1
 
 * Added new feature to reduce the cooldown on powers by killing top fighters in each biome.

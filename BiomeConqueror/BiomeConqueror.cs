@@ -13,7 +13,7 @@ namespace BiomeConqueror
     {
         public const string GUID = "Turbero.BiomeConqueror";
         public const string NAME = "Biome Conqueror";
-        public const string VERSION = "1.3.1";
+        public const string VERSION = "1.3.2";
         
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -114,6 +114,14 @@ namespace BiomeConqueror
             if (biome != previousBiome)
             {
                 Logger.Log($"Biome changed: {previousBiome} -> {biome}");
+                
+                //Force to remove wet when exiting Swamp
+                if (previousBiome == Heightmap.Biome.Swamp)
+                {
+                    Logger.Log("Coming from swamp, forcing wet false");
+                    EnvMan.instance.GetCurrentEnvironment().m_isWet = false;
+                }
+                
                 previousBiome = biome;
                 PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
             }
