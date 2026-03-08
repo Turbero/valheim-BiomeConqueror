@@ -48,6 +48,11 @@ namespace BiomeConqueror.Benefits
                         __instance.GetCurrentEnvironment().m_isFreezingAtNight = true;
                     }
                 }
+                else
+                {
+                    __instance.GetCurrentEnvironment().m_isFreezing = false;
+                    __instance.GetCurrentEnvironment().m_isFreezingAtNight = false;
+                }
             }
 
             return true;
