@@ -13,10 +13,11 @@ namespace BiomeConqueror.Benefits
             {
                 if (__instance.name.StartsWith("Deer") &&
                     Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Meadows &&
-                    BiomeConquerorUtils.isEikthyrDefeatedForPlayer())
+                    BiomeConquerorUtils.isEikthyrDefeatedForPlayer() &&
+                    ConfigurationFile.eikthyrBenefitExtraDrop.Value > 0)
                 {
                     Logger.Log("Eikthyr defeated: dropping extra meat.");
-                    // Manually instantiate after death animation
+                    // Manually instantiate after killing hit
                     GameObject deerMeatObject = ZNetScene.instance.GetPrefab("DeerMeat");
                     if (deerMeatObject == null)
                     {
@@ -24,14 +25,12 @@ namespace BiomeConqueror.Benefits
                         return;
                     }
 
-                    GameObject spawnedItem = Object.Instantiate(deerMeatObject, __instance.transform.position,
-                        Quaternion.identity);
+                    GameObject spawnedItem = Object.Instantiate(deerMeatObject, __instance.transform.position, Quaternion.identity);
                     ItemDrop itemDrop = spawnedItem.GetComponent<ItemDrop>();
                     if (itemDrop != null)
                     {
-                        itemDrop.m_itemData.m_stack +=
-                            ConfigurationFile.eikthyrBenefitExtraDrop.Value; // Quantity to drop
-                        Logger.Log("Ítem DeerMeat successfully generated.");
+                        itemDrop.m_itemData.m_stack = ConfigurationFile.eikthyrBenefitExtraDrop.Value; // Extra quantity to drop
+                        Logger.Log($"Ítem DeerMeat x{ConfigurationFile.eikthyrBenefitExtraDrop.Value} successfully generated.");
                     }
                     else
                     {
