@@ -20,7 +20,10 @@ namespace BiomeConqueror.Benefits
             {
                 updateDemisterRangeAndText(__instance);
             }
-            catch (Exception ex){}
+            catch
+            {
+                // ignored
+            }
         }
 
         public static void updateDemisterRangeAndText(Demister __instance)
