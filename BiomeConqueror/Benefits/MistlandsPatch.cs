@@ -35,8 +35,8 @@ namespace BiomeConqueror.Benefits
                 if (!__instance.isActiveAndEnabled || itemData == null) return;
                 __instance.m_forceField.endRange = 
                     Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands
-                        ? ConfigurationFile.queenBenefitRange.Value
-                        : ConfigurationFile.queenBenefitBaseRange.Value;
+                        ? ConfigurationFile.queenBenefitRangeAfter.Value
+                        : ConfigurationFile.queenBenefitRangeBefore.Value;
             }
 
             float demisterRange = __instance.m_forceField.endRange;

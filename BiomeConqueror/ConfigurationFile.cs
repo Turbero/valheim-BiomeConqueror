@@ -28,8 +28,8 @@ namespace BiomeConqueror
         public static ConfigEntry<bool> moderBenefitEligibleEnabled;
         public static ConfigEntry<bool> yagluthBenefitEligibleEnabled;
         public static ConfigEntry<bool> queenBenefitEligibleEnabled;
-        public static ConfigEntry<float> queenBenefitRange;
-        public static ConfigEntry<float> queenBenefitBaseRange;
+        public static ConfigEntry<float> queenBenefitRangeAfter;
+        public static ConfigEntry<float> queenBenefitRangeBefore;
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
         public static ConfigEntry<float> faderBenefitDamageFireResistant;
         public static ConfigEntry<int> bossPowerReduction;
@@ -57,48 +57,30 @@ namespace BiomeConqueror
                 _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
                 modEnabled = config("1 - General", "Enabled", true, "Enabling/Disabling the mod (default = true)");
-                debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
-                worldProgression = config("2 - Config", "WorldProgression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
-                hotKey = config("2 - Config", "HotKey", KeyCode.F3, "Hot key to open the compendium (default = F3)", false);
-                benefitIcons = config("2 - Config", "BenefitIcons", true, "Enabling/Disabling the benefits as permanent buffs (default = false)", false);
-                eikthyrBenefitEligibleEnabled = config("3 - Victories", "EikthyrBenefitEligibleEnabled", true, "Allows to earn the benefit that double drops deer meat in all meadows after killing Eikthyr (default = true)");
-                eikthyrBenefitExtraDrop = config("3 - Victories", "EikthyrBenefitExtraDrop", 2, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = 2)");
-                elderBenefitEligibleEnabled = config("3 - Victories", "ElderBenefitEligibleEnabled", true, "Allows to earn the benefit that TBD in all black forests after killing the Elder (default = true)");
-                elderBenefitMultiplierTrollDmg = config("3 - Victories", "ElderBenefitMultiplierTrollDmg", 2.0f, "Sets up the multiplier damage applied to trolls in black forests after killing the Elder (default = 1.5)");
-                elderBenefitMultiplierBearDmg = config("3 - Victories", "ElderBenefitMultiplierBearDmg", 2.0f, "Sets up the multiplier damage applied to bears in black forests after killing the Elder (default = 1.5)");
-                bonemassBenefitEligibleEnabled = config("3 - Victories", "BonemassBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
-                moderBenefitEligibleEnabled = config("3 - Victories", "ModerBenefitEligibleEnabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
-                yagluthBenefitEligibleEnabled = config("3 - Victories", "YagluthBenefitEligibleEnabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
-                queenBenefitEligibleEnabled = config("3 - Victories", "QueenBenefitEligibleEnabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
-                queenBenefitRange = config("3 - Victories", "QueenBenefitRange", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
-                queenBenefitBaseRange = config("3 - Victories", "queenBenefitBaseRange", 10f, "Establishes the base wisp light range before killing The Seeker Queen (default = 10)");
-                faderBenefitEligibleEnabled = config("3 - Victories", "FaderBenefitEligibleEnabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
-                faderBenefitDamageFireResistant = config("3 - Victories", "FaderBenefitDamageFireResistant", 100f, "Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)");
-                bossPowerReduction = config("4 - Cooldown power", "BossPowerCooldownReduction", 60, "Number of seconds to reduce the power cooldown when one of the specified monsters is defeated (default = 60)");
-                bossPowerReductionBumpedByStars = config("4 - Cooldown power", "BossPowerReductionBumpedByStars", true, "Choose if high-level monsters must decrease more time to the power cooldown proportional to their number of starts (default = true)");
-                enemiesForReduction = config("4 - Cooldown power", "EnemiesForReduction", "Troll,Bjorn,Serpent,Abomination,StoneGolem,Unbjorn,Gjall,BonemawSerpent", "Comma-separated list of enemies to apply power cooldown reduction when defeated (leave blank to deactivate)");
-                reductionMessageSuccess = config("4 - Cooldown power", "ReductionMessageSuccess", "Cooldown reduced by {0} seconds", "Message on the top left corner when killed one of the specified monsters to reduce boss power cooldown");
+                debug = config("1 - General", "Debug Mode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
                 
-                modEnabled.SettingChanged += Configuration_SettingChanged;
-                worldProgression.SettingChanged += Configuration_SettingChanged;
-                benefitIcons.SettingChanged += BenefitIcons_SettingChanged;
-                eikthyrBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                eikthyrBenefitExtraDrop.SettingChanged += Configuration_SettingChanged;
-                elderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                elderBenefitMultiplierTrollDmg.SettingChanged += Configuration_SettingChanged;
-                elderBenefitMultiplierBearDmg.SettingChanged += Configuration_SettingChanged;
-                bonemassBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                moderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                yagluthBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                queenBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                queenBenefitRange.SettingChanged += Configuration_SettingChanged;
-                queenBenefitBaseRange.SettingChanged += Configuration_SettingChanged;
-                faderBenefitEligibleEnabled.SettingChanged += Configuration_SettingChanged;
-                faderBenefitDamageFireResistant.SettingChanged += Configuration_SettingChanged;
-                bossPowerReduction.SettingChanged += Configuration_SettingChanged;
-                bossPowerReductionBumpedByStars.SettingChanged += Configuration_SettingChanged;
-                enemiesForReduction.SettingChanged += Configuration_SettingChanged;
-                reductionMessageSuccess.SettingChanged += Configuration_SettingChanged;
+                worldProgression = config("2 - Config", "World Progression", false, "Enabling/Disabling the benefits with the world progression (default = false, which is by player personal battle wins)");
+                hotKey = config("2 - Config", "HotKey", KeyCode.F3, "Hot key to open the compendium (default = F3)", false);
+                
+                benefitIcons = config("3 - Victories", "Benefit Icons", true, "Enabling/Disabling the benefits as permanent buffs (default = false)", false);
+                eikthyrBenefitEligibleEnabled   = config("3.1 - Eikthyr", "Benefit Eligible Enabled", true, "Allows to earn the benefit that double drops deer meat in all meadows after killing Eikthyr (default = true)");
+                eikthyrBenefitExtraDrop         = config("3.1 - Eikthyr", "Benefit Extra Drop", 1, "Establishes the extra meat drop from deers in all meadows after killing Eikthyr (default = +1)");
+                elderBenefitEligibleEnabled     = config("3.2 - The Elder", "Elder Benefit Eligible Enabled", true, "Allows to earn the benefit that TBD in all black forests after killing the Elder (default = true)");
+                elderBenefitMultiplierTrollDmg  = config("3.2 - The Elder", "Elder Benefit Multiplier Troll Dmg", 2.0f, "Sets up the multiplier damage applied to trolls in black forests after killing the Elder (default = 2x)");
+                elderBenefitMultiplierBearDmg   = config("3.2 - The Elder", "Elder Benefit Multiplier Bear Dmg", 2.0f, "Sets up the multiplier damage applied to bears in black forests after killing the Elder (default = 2x)");
+                bonemassBenefitEligibleEnabled  = config("3.3 - Bonemass", "Bonemass Benefit Eligible Enabled", true, "Allows to earn the benefit that stops getting wet by rain in all swamps after killing Bonemass (default = true)");
+                moderBenefitEligibleEnabled     = config("3.4 - Moder", "Moder Benefit Eligible Enabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all mountains after killing Moder (default = true)");
+                yagluthBenefitEligibleEnabled   = config("3.5 - Yagluth", "Yagluth Benefit Eligible Enabled", true, "Allows to earn the benefit that stops deathsquitos attacking you (default = true)");
+                queenBenefitEligibleEnabled     = config("3.6 - Queen", "Queen Benefit Eligible Enabled", true, "Allows to earn the benefit that increases the wisp light range after killing The Seeker Queen (default = true)");
+                queenBenefitRangeAfter          = config("3.6 - Queen", "Queen Benefit Range After Defeat", 100f, "Establishes the new wisp light range after killing The Seeker Queen (default = 100)");
+                queenBenefitRangeBefore         = config("3.6 - Queen", "Queen Benefit Range Before Defeat", 10f, "Establishes the base wisp light range before killing The Seeker Queen (default = 10)");
+                faderBenefitEligibleEnabled     = config("3.7 - Fader", "Fader Benefit Eligible Enabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
+                faderBenefitDamageFireResistant = config("3.7 - Fader", "Fader Benefit Damage Fire Resistant", 100f, new ConfigDescription("Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)", new AcceptableValueRange<float>(1f, 100f)));
+                
+                bossPowerReduction              = config("4 - Boss Power Cooldown power", "Cooldown Reduction", 60, "Number of seconds to reduce the power cooldown when one of the specified monsters is defeated (default = 60)");
+                bossPowerReductionBumpedByStars = config("4 - Boss Power Cooldown power", "Cooldown Reduction Bumped By Stars", true, "Choose if high-level monsters must decrease more time to the power cooldown proportional to their number of starts (default = true)");
+                enemiesForReduction             = config("4 - Boss Power Cooldown power", "Enemies For Reduction", "Troll,Bjorn,Serpent,Abomination,StoneGolem,Unbjorn,Gjall,BonemawSerpent", "Comma-separated list of enemies to apply power cooldown reduction when defeated (leave blank to deactivate)");
+                reductionMessageSuccess         = config("4 - Boss Power Cooldown power", "Reduction Message Success", "Cooldown reduced by {0} seconds", "Message on the top left corner when killed one of the specified monsters to reduce boss power cooldown");
                 
                 SetupWatcher();
             }
@@ -122,12 +104,19 @@ namespace BiomeConqueror
             {
                 Logger.LogInfo("Attempting to reload configuration...");
                 configFile.Reload();
+                SettingChanged(null, null);
                 Logger.LogInfo("Reloaded configuration...");
             }
-            catch
+            catch(Exception ex)
             {
-                Logger.LogError($"There was an issue loading {ConfigFileName}");
+                Logger.LogError($"There was an issue loading {ConfigFileName}. {ex}");
             }
+        }
+
+        private static void SettingChanged(object sender, EventArgs e)
+        {
+            BenefitIcons_SettingChanged(sender, e);
+            Configuration_SettingChanged(sender, e);
         }
 
         private static void BenefitIcons_SettingChanged(object sender, EventArgs e)

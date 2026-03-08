@@ -97,7 +97,7 @@ namespace BiomeConqueror.Helpers
             }
             if (spriteName == TROPHY_QUEEN)
             {
-                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitRange.Value + "m.";
+                return Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitRangeAfter.Value + "m.";
             }
             if (spriteName == TROPHY_FADER)
             {

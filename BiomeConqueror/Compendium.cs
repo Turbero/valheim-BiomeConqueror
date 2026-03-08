@@ -80,7 +80,7 @@ namespace BiomeConqueror
                 if (benefitQueen)
                 {
                     stringBuilder.Append("<color=orange>" + Localization.instance.Localize("$se_queen_name") + "</color>\n");
-                    stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitRange.Value + "m.");
+                    stringBuilder.Append(Localization.instance.Localize("$item_demister") + " = " + ConfigurationFile.queenBenefitRangeAfter.Value + "m.");
                     stringBuilder.Append("\n");
                 }
                 if (benefitFader)
