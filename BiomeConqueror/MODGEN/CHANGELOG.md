@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 1.4.0
+
+* Reorganized config option names in .cfg file (delete and create the .cfg file again for your convenience)
+* Fixed important issue that was STILL not cancelling the freezing status after exiting mountains before having killed Moder.
+* Fixed deer drop when Eikthyr is killed, the extra drop was not matching the .cfg file value
+
 ## 1.3.3
 
 * Fixed important issue that was not removing the freezing status after exiting mountain before having killed Moder. Sorry again!
