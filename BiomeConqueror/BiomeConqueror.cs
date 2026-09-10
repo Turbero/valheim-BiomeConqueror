@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using BiomeConqueror.Helpers;
 using UnityEngine;
@@ -99,21 +98,16 @@ namespace BiomeConqueror
         }
     }
     
-    [HarmonyPatch(typeof(EnvMan))]
+    [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
     public static class BiomeChangePatch
     {
         private static Heightmap.Biome previousBiome;
 
-        static MethodBase TargetMethod()
+        public static void Postfix(long sec, BiomeSector biome)
         {
-            return AccessTools.Method(typeof(EnvMan), "UpdateEnvironment");
-        }
-
-        public static void Postfix(long sec, Heightmap.Biome biome)
-        {
-            if (biome != previousBiome)
+            if (biome.Biome != previousBiome)
             {
-                Logger.Log($"Biome changed: {previousBiome} -> {biome}");
+                Logger.Log($"Biome changed: {previousBiome} -> {biome.Biome}");
                 
                 //Force to remove wet when exiting Swamp
                 if (previousBiome == Heightmap.Biome.Swamp)
@@ -126,7 +120,7 @@ namespace BiomeConqueror
                     EnvMan.instance.GetCurrentEnvironment().m_isFreezing = false;
                 }
                 
-                previousBiome = biome;
+                previousBiome = biome.Biome;
                 PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
             }
         }

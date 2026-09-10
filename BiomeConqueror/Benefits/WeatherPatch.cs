@@ -5,7 +5,7 @@ namespace BiomeConqueror.Benefits
     [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
     public class WeatherPatch
     {
-        static bool Prefix(EnvMan __instance)
+        static bool Prefix(EnvMan __instance, long sec, BiomeSector biome)
         {
             Player player = Player.m_localPlayer;
 
