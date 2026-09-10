@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.4.1
+
+* Recompiled for compatibility with 1.0
+* ServerSync upgrade
+
 ## 1.4.0
 
 * Reorganized config option names in .cfg file (delete and create the .cfg file again for your convenience)
