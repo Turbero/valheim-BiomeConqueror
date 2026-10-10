@@ -4,64 +4,73 @@ namespace BiomeConqueror
 {
     public class BiomeConquerorUtils
     {
-        private static bool hasUniqueKey(string key, bool configValue)
+        private static bool hasUniqueKey(string key)
         {
-            return ConfigurationFile.modEnabled.Value && configValue &&
+            return ConfigurationFile.modEnabled.Value &&
                 Player.m_localPlayer.HaveUniqueKey(key);
         }
 
         private static bool hasGlobalKey(string key)
         {
-            return ConfigurationFile.modEnabled.Value && ConfigurationFile.worldProgression.Value &&
-                ZoneSystem.instance.GetGlobalKey(key);
+            return ConfigurationFile.modEnabled.Value && 
+                   ConfigurationFile.worldProgression.Value &&
+                   ZoneSystem.instance.GetGlobalKey(key);
         }
 
         public static bool isEikthyrDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.EIKTHYR_DEFEATED_PLAYER_KEY, ConfigurationFile.eikthyrBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_eikthyr") || hasGlobalKey("DeerGod");
+            return ConfigurationFile.eikthyrBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.EIKTHYR_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_eikthyr") || hasGlobalKey("DeerGod"));
         }
 
         public static bool isElderDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.ELDER_DEFEATED_PLAYER_KEY, ConfigurationFile.elderBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_gdking") || hasGlobalKey("TreeGod");
+            return ConfigurationFile.elderBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.ELDER_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_gdking") || hasGlobalKey("TreeGod"));
         }
 
         public static bool isBonemassDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.BONEMASS_DEFEATED_PLAYER_KEY, ConfigurationFile.bonemassBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_bonemass") || hasGlobalKey("BlobGod");
+            return ConfigurationFile.bonemassBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.BONEMASS_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_bonemass") || hasGlobalKey("BlobGod"));
         }
 
         public static bool isModerDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.MODER_DEFEATED_PLAYER_KEY, ConfigurationFile.moderBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_dragon") || hasGlobalKey("DrakeGod");
+            return ConfigurationFile.moderBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.MODER_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_dragon") || hasGlobalKey("DrakeGod"));
         }
 
         public static bool isYagluthDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.YAGLUTH_DEFEATED_PLAYER_KEY, ConfigurationFile.yagluthBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_goblinking") || hasGlobalKey("GobGod");
+            return ConfigurationFile.yagluthBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.YAGLUTH_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_goblinking") || hasGlobalKey("GobGod"));
         }
 
         public static bool isQueenDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.QUEEN_DEFEATED_PLAYER_KEY, ConfigurationFile.queenBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_queen") || hasGlobalKey("BugGod");
+            return ConfigurationFile.queenBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.QUEEN_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_queen") || hasGlobalKey("BugGod"));
         }
         
         public static bool isFaderDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.FADER_DEFEATED_PLAYER_KEY, ConfigurationFile.faderBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_fader") || hasGlobalKey("SkeleGod");
+            return ConfigurationFile.faderBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.FADER_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_fader") || hasGlobalKey("SkeleGod"));
         }
         
         public static bool isKallDefeatedForPlayer()
         {
-            return hasUniqueKey(Constants.KALL_DEFEATED_PLAYER_KEY, ConfigurationFile.kallBenefitEligibleEnabled.Value) ||
-                   hasGlobalKey("defeated_frozenking_p3");
+            return ConfigurationFile.kallBenefitEligibleEnabled.Value && (
+                hasUniqueKey(Constants.KALL_DEFEATED_PLAYER_KEY) ||
+                hasGlobalKey("defeated_frozenking_p3"));
         }
     }
 }
