@@ -7,6 +7,7 @@ Added:
 * New top enemies from Mistlands, Ashlands and Deep North to the default list of enemies that can reduce cooldowns on powers after being defeated.
 Changed:
 * Extra deer meat after defeating Eikthyr now drops after death animation, not before.
+* Mod icon updated
 Fixed:
 * Issue when enabling/disabling benefits eligibility in-game in the .cfg file
 
