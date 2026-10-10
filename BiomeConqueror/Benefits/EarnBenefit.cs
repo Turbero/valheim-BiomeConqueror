@@ -34,28 +34,28 @@ namespace BiomeConqueror.Benefits
                     else if (__instance.m_name == "$enemy_bonemass" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Swamp)
                     {
                         Player.m_localPlayer.AddUniqueKey(BONEMASS_DEFEATED_PLAYER_KEY);
-                        Logger.Log($"** Bonemass defeated");
+                        Logger.Log("** Bonemass defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.bonemassBenefitEligibleEnabled.Value)
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, BONEMASS_DEFEATED_MESSAGE_KEY, TROPHY_BONEMASS);
                     }
                     else if (__instance.m_name == "$enemy_dragon" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mountain)
                     {
                         Player.m_localPlayer.AddUniqueKey(MODER_DEFEATED_PLAYER_KEY);
-                        Logger.Log($"** Moder defeated");
+                        Logger.Log("** Moder defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.moderBenefitEligibleEnabled.Value)
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, MODER_DEFEATED_MESSAGE_KEY, TROPHY_MODER);
                     }
                     else if (__instance.m_name == "$enemy_goblinking" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Plains)
                     {
                         Player.m_localPlayer.AddUniqueKey(YAGLUTH_DEFEATED_PLAYER_KEY);
-                        Logger.Log($"** Yagluth defeated");
+                        Logger.Log("** Yagluth defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.yagluthBenefitEligibleEnabled.Value)
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, YAGLUTH_DEFEATED_MESSAGE_KEY, TROPHY_YAGLUTH);
                     }
                     else if (__instance.m_name == "$enemy_seekerqueen" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.Mistlands)
                     {
                         Player.m_localPlayer.AddUniqueKey(QUEEN_DEFEATED_PLAYER_KEY);
-                        Logger.Log($"** Queen defeated");
+                        Logger.Log("** Queen defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.queenBenefitEligibleEnabled.Value)
                         {
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, QUEEN_DEFEATED_MESSAGE_KEY, TROPHY_QUEEN);
@@ -70,9 +70,15 @@ namespace BiomeConqueror.Benefits
                     }else if (__instance.m_name == "$enemy_fader" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.AshLands)
                     {
                         Player.m_localPlayer.AddUniqueKey(FADER_DEFEATED_PLAYER_KEY);
-                        Logger.Log($"** Fader defeated");
+                        Logger.Log("** Fader defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.faderBenefitEligibleEnabled.Value)
                             PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
+                    }else if (__instance.m_name == "$enemy_frozenking_p3" && Player.m_localPlayer.GetCurrentBiome() == Heightmap.Biome.DeepNorth)
+                    {
+                        Player.m_localPlayer.AddUniqueKey(KALL_DEFEATED_PLAYER_KEY);
+                        Logger.Log("** Kall defeated");
+                        if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.kallBenefitEligibleEnabled.Value)
+                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, KALL_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
                     }
                 }
             }

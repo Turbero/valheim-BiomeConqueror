@@ -103,6 +103,10 @@ namespace BiomeConqueror.Helpers
             {
                 return Localization.instance.Localize("$biome_ashlands") + " / " + Localization.instance.Localize("$item_durability") + " " + Localization.instance.Localize("$inventory_fire") + " +" + ConfigurationFile.faderBenefitDamageFireResistant.Value + "%";
             }
+            if (spriteName == TROPHY_KALL)
+            {
+                return Localization.instance.Localize("$biome_deepnorth") + " / " + Localization.instance.Localize("$se_freezing_name") + " = " + Localization.instance.Localize("$menu_none");
+            }
             return "";
         }
 
@@ -177,6 +181,10 @@ namespace BiomeConqueror.Helpers
             else if (player.GetCurrentBiome() == Heightmap.Biome.AshLands && BiomeConquerorUtils.isFaderDefeatedForPlayer())
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
+            }
+            else if (player.GetCurrentBiome() == Heightmap.Biome.DeepNorth && BiomeConquerorUtils.isKallDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(Player.m_localPlayer, KALL_DEFEATED_MESSAGE_KEY, TROPHY_KALL);
             }
         }
     }

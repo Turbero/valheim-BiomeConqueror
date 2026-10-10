@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\Valheim\profiles\Default\BepInEx\plugins\turbero-BiomeConqueror\</OutputPath>
+    <OutputPath>..\..\..\..\AppData\Roaming\com.kesomannen.gale\valheim\profiles\Default\BepInEx\plugins\turbero-BiomeConqueror\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -123,6 +123,7 @@
     <Compile Include="Compendium.cs" />
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\GameManager.cs" />
     <Compile Include="Helpers\PlayerBuffs.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

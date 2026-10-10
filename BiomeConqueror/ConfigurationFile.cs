@@ -32,6 +32,7 @@ namespace BiomeConqueror
         public static ConfigEntry<float> queenBenefitRangeBefore;
         public static ConfigEntry<bool> faderBenefitEligibleEnabled;
         public static ConfigEntry<float> faderBenefitDamageFireResistant;
+        public static ConfigEntry<bool> kallBenefitEligibleEnabled;
         public static ConfigEntry<int> bossPowerReduction;
         public static ConfigEntry<bool> bossPowerReductionBumpedByStars;
         public static ConfigEntry<string> enemiesForReduction;
@@ -76,10 +77,11 @@ namespace BiomeConqueror
                 queenBenefitRangeBefore         = config("3.6 - Queen", "Queen Benefit Range Before Defeat", 10f, "Establishes the base wisp light range before killing The Seeker Queen (default = 10)");
                 faderBenefitEligibleEnabled     = config("3.7 - Fader", "Fader Benefit Eligible Enabled", true, "Allows to earn the benefit that gives you burning damage protection in lava from Ashlands after killing the Fader (default = true)");
                 faderBenefitDamageFireResistant = config("3.7 - Fader", "Fader Benefit Damage Fire Resistant", 100f, new ConfigDescription("Gives extra percentage of burning damage protection from lava in Ashlands after defeating Fader (default = 100)", new AcceptableValueRange<float>(1f, 100f)));
-                
+                kallBenefitEligibleEnabled      = config("3.8 - Kall", "Kall Benefit Eligible Enabled", true, "Allows to earn the benefit that stops getting frozen without protection effects in all deep north areas after killing Kall (default = true)");
+
                 bossPowerReduction              = config("4 - Boss Power Cooldown power", "Cooldown Reduction", 60, "Number of seconds to reduce the power cooldown when one of the specified monsters is defeated (default = 60)");
                 bossPowerReductionBumpedByStars = config("4 - Boss Power Cooldown power", "Cooldown Reduction Bumped By Stars", true, "Choose if high-level monsters must decrease more time to the power cooldown proportional to their number of starts (default = true)");
-                enemiesForReduction             = config("4 - Boss Power Cooldown power", "Enemies For Reduction", "Troll,Bjorn,Serpent,Abomination,StoneGolem,Unbjorn,Gjall,BonemawSerpent", "Comma-separated list of enemies to apply power cooldown reduction when defeated (leave blank to deactivate)");
+                enemiesForReduction             = config("4 - Boss Power Cooldown power", "Enemies For Reduction", "Troll,Bjorn,Serpent,Abomination,StoneGolem,Unbjorn,Gjall,BonemawSerpent,FallenValkyrie,JotunWitch", "Comma-separated list of enemies to apply power cooldown reduction when defeated (leave blank to deactivate)");
                 reductionMessageSuccess         = config("4 - Boss Power Cooldown power", "Reduction Message Success", "Cooldown reduced by {0} seconds", "Message on the top left corner when killed one of the specified monsters to reduce boss power cooldown");
                 
                 SetupWatcher();

@@ -48,6 +48,19 @@ namespace BiomeConqueror.Benefits
                         __instance.GetCurrentEnvironment().m_isFreezingAtNight = true;
                     }
                 }
+                else if (player.GetCurrentBiome() == Heightmap.Biome.DeepNorth)
+                {
+                    if (BiomeConquerorUtils.isKallDefeatedForPlayer())
+                    {
+                        __instance.GetCurrentEnvironment().m_isFreezing = false;
+                        __instance.GetCurrentEnvironment().m_isFreezingAtNight = false;
+                    }
+                    else
+                    {
+                        __instance.GetCurrentEnvironment().m_isFreezing = true;
+                        __instance.GetCurrentEnvironment().m_isFreezingAtNight = true;
+                    }
+                }
                 else
                 {
                     __instance.GetCurrentEnvironment().m_isFreezing = false;

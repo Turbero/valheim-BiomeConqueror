@@ -11,6 +11,7 @@ namespace BiomeConqueror.Helpers
         public static readonly string YAGLUTH_DEFEATED_MESSAGE_KEY = "$event_boss05_end";
         public static readonly string QUEEN_DEFEATED_MESSAGE_KEY = "$enemy_boss_queen_deathmessage";
         public static readonly string FADER_DEFEATED_MESSAGE_KEY = "$enemy_boss_fader_deathmessage";
+        public static readonly string KALL_DEFEATED_MESSAGE_KEY = "$enemy_boss_frozenking_deathmessage";
         public static readonly string TROPHY_EIKTHYR = "TrophyEikthyr";
         public static readonly string TROPHY_ELDER = "TrophyTheElder";
         public static readonly string TROPHY_BONEMASS = "TrophyBonemass";
@@ -18,6 +19,7 @@ namespace BiomeConqueror.Helpers
         public static readonly string TROPHY_YAGLUTH = "TrophyGoblinKing";
         public static readonly string TROPHY_QUEEN = "TrophySeekerQueen";
         public static readonly string TROPHY_FADER = "TrophyFader";
+        public static readonly string TROPHY_KALL = "FrozenKingDrop";
         public static readonly string EIKTHYR_DEFEATED_PLAYER_KEY = "EikthyrDefeated_BC";
         public static readonly string ELDER_DEFEATED_PLAYER_KEY = "ElderDefeated_BC";
         public static readonly string BONEMASS_DEFEATED_PLAYER_KEY = "BonemassDefeated_BC";
@@ -25,6 +27,7 @@ namespace BiomeConqueror.Helpers
         public static readonly string YAGLUTH_DEFEATED_PLAYER_KEY = "YagluthDefeated_BC";
         public static readonly string QUEEN_DEFEATED_PLAYER_KEY = "QueenDefeated_BC";
         public static readonly string FADER_DEFEATED_PLAYER_KEY = "FaderDefeated_BC";
+        public static readonly string KALL_DEFEATED_PLAYER_KEY = "KallDefeated_BC";
         
         public static readonly List<string> benefitDefeatedMessageKeys = new List<string> {
             EIKTHYR_DEFEATED_MESSAGE_KEY,
@@ -33,7 +36,8 @@ namespace BiomeConqueror.Helpers
             MODER_DEFEATED_MESSAGE_KEY,
             YAGLUTH_DEFEATED_MESSAGE_KEY,
             QUEEN_DEFEATED_MESSAGE_KEY,
-            FADER_DEFEATED_MESSAGE_KEY
+            FADER_DEFEATED_MESSAGE_KEY,
+            KALL_DEFEATED_PLAYER_KEY
         };
         public static readonly List<string> benefitDefeatedPlayerOldKeys = new List<string> {
             "EikthyrDefeated",
@@ -42,7 +46,8 @@ namespace BiomeConqueror.Helpers
             "ModerDefeated",
             "YagluthDefeated",
             "QueenDefeated",
-            "FaderDefeated"
+            "FaderDefeated",
+            "KallDefeated"
         };
     }
 }

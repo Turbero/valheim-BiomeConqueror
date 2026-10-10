@@ -57,5 +57,11 @@ namespace BiomeConqueror
             return hasUniqueKey(Constants.FADER_DEFEATED_PLAYER_KEY, ConfigurationFile.faderBenefitEligibleEnabled.Value) ||
                    hasGlobalKey("defeated_fader") || hasGlobalKey("SkeleGod");
         }
+        
+        public static bool isKallDefeatedForPlayer()
+        {
+            return hasUniqueKey(Constants.KALL_DEFEATED_PLAYER_KEY, ConfigurationFile.kallBenefitEligibleEnabled.Value) ||
+                   hasGlobalKey("defeated_frozenking_p3");
+        }
     }
 }
