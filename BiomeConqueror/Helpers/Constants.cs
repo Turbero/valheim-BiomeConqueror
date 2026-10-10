@@ -37,7 +37,7 @@ namespace BiomeConqueror.Helpers
             YAGLUTH_DEFEATED_MESSAGE_KEY,
             QUEEN_DEFEATED_MESSAGE_KEY,
             FADER_DEFEATED_MESSAGE_KEY,
-            KALL_DEFEATED_PLAYER_KEY
+            KALL_DEFEATED_MESSAGE_KEY
         };
         public static readonly List<string> benefitDefeatedPlayerOldKeys = new List<string> {
             "EikthyrDefeated",
