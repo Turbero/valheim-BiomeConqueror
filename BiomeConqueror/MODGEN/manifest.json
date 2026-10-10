@@ -1,9 +1,9 @@
 {
     "name": "BiomeConqueror",
-    "version_number": "1.4.1",
+    "version_number": "1.5.0",
     "website_url": "https://github.com/Turbero/valheim-BiomeConqueror",
-    "description": "Mod for progression benefits after defeating biome bosses.",
+    "description": "Mod for progression benefits after defeating biome bosses. Conquer the biomes and gain passive perks.",
     "dependencies": [
-        "denikson-BepInExPack_Valheim-5.4.2350"
+        "denikson-BepInExPack_Valheim-5.4.2351"
     ]
 }

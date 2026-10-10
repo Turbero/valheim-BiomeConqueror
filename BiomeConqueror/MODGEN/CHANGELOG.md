@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 1.5.0
+
+* Now after defeating the final boss, you will become inmune to the freezing status in Deep North.
+* Extra deer meat after defeating Eikthyr now drops after death animation, not before.
+* Added top enemies from Mistlands, Ashlands and Deep North to the default list of enemies that can reduce cooldowns on powers after being defeated.
+
 ## 1.4.1
 
 * Recompiled for compatibility with 1.0
