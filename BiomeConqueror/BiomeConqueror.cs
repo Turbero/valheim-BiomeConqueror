@@ -97,32 +97,4 @@ namespace BiomeConqueror
             PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
         }
     }
-    
-    [HarmonyPatch(typeof(EnvMan), "UpdateEnvironment")]
-    public static class BiomeChangePatch
-    {
-        private static Heightmap.Biome previousBiome;
-
-        public static void Postfix(long sec, BiomeSector biome)
-        {
-            if (biome.Biome != previousBiome)
-            {
-                Logger.Log($"Biome changed: {previousBiome} -> {biome.Biome}");
-                
-                //Force to remove wet when exiting Swamp
-                if (previousBiome == Heightmap.Biome.Swamp)
-                {
-                    Logger.Log("Coming from swamp, forcing wet false");
-                    EnvMan.instance.GetCurrentEnvironment().m_isWet = false;
-                } else if (previousBiome == Heightmap.Biome.Mountain)
-                {
-                    Logger.Log("Coming from mountain, forcing freezing false");
-                    EnvMan.instance.GetCurrentEnvironment().m_isFreezing = false;
-                }
-                
-                previousBiome = biome.Biome;
-                PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
-            }
-        }
-    }
 }

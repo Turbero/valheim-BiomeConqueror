@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using BiomeConqueror.Helpers;
+using HarmonyLib;
 
 namespace BiomeConqueror.Benefits
 {
@@ -69,6 +70,34 @@ namespace BiomeConqueror.Benefits
             }
 
             return true;
+        }
+
+        private static Heightmap.Biome previousBiome;
+
+        public static void Postfix(long sec, BiomeSector biome)
+        {
+            if (biome.Biome != previousBiome)
+            {
+                Logger.Log($"Biome changed: {previousBiome} -> {biome.Biome}");
+                
+                //Force to remove wet when exiting Swamp
+                if (previousBiome == Heightmap.Biome.Swamp)
+                {
+                    Logger.Log("Coming from swamp, forcing wet false");
+                    EnvMan.instance.GetCurrentEnvironment().m_isWet = false;
+                } else if (previousBiome == Heightmap.Biome.Mountain)
+                {
+                    Logger.Log("Coming from mountain, forcing freezing false");
+                    EnvMan.instance.GetCurrentEnvironment().m_isFreezing = false;
+                } else if (previousBiome == Heightmap.Biome.DeepNorth)
+                {
+                    Logger.Log("Coming from deep north, forcing freezing false");
+                    EnvMan.instance.GetCurrentEnvironment().m_isFreezing = false;
+                }
+
+                previousBiome = biome.Biome;
+                PlayerBuffs.ActivateCurrentEnvBiomeBenefitBuff();
+            }
         }
     }
 }
