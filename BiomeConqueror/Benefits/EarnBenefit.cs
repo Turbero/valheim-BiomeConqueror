@@ -78,7 +78,7 @@ namespace BiomeConqueror.Benefits
                         Player.m_localPlayer.AddUniqueKey(KALL_DEFEATED_PLAYER_KEY);
                         Logger.Log("** Kall defeated");
                         if (ConfigurationFile.benefitIcons.Value && ConfigurationFile.kallBenefitEligibleEnabled.Value)
-                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, KALL_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
+                            PlayerBuffs.AddBenefitBuff(Player.m_localPlayer, KALL_DEFEATED_MESSAGE_KEY, TROPHY_KALL);
                     }
                 }
             }

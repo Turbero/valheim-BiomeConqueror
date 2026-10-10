@@ -19,7 +19,7 @@ namespace BiomeConqueror.Helpers
         public static readonly string TROPHY_YAGLUTH = "TrophyGoblinKing";
         public static readonly string TROPHY_QUEEN = "TrophySeekerQueen";
         public static readonly string TROPHY_FADER = "TrophyFader";
-        public static readonly string TROPHY_KALL = "FrozenKingDrop";
+        public static readonly string TROPHY_KALL = "frozenkingdrop";
         public static readonly string EIKTHYR_DEFEATED_PLAYER_KEY = "EikthyrDefeated_BC";
         public static readonly string ELDER_DEFEATED_PLAYER_KEY = "ElderDefeated_BC";
         public static readonly string BONEMASS_DEFEATED_PLAYER_KEY = "BonemassDefeated_BC";

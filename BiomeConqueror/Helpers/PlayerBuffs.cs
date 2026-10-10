@@ -143,6 +143,10 @@ namespace BiomeConqueror.Helpers
             {
                 if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, FADER_DEFEATED_MESSAGE_KEY, TROPHY_FADER);
             }
+            else if (EnvMan.instance.GetCurrentBiome() == Heightmap.Biome.DeepNorth && BiomeConquerorUtils.isKallDefeatedForPlayer())
+            {
+                if (ConfigurationFile.benefitIcons.Value) AddBenefitBuff(player, KALL_DEFEATED_MESSAGE_KEY, TROPHY_KALL);
+            }
             else
             {
                 RemoveAllBenefitBuffs();
