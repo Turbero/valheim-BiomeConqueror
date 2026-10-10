@@ -136,6 +136,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Libs\ServerSync.dll" />
     <Content Include="MODGEN\icon.png" />
   </ItemGroup>
